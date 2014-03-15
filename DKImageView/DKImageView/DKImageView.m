@@ -15,6 +15,9 @@
     DKBlackOverlayView *    _blackOverlay;
     DKImageOverlayView *    _overlayView;
     DKRatio *               _ratio;
+    
+    UIScrollView *          _scrollView;
+//    UIImageView *           _imageView;
 }
 
 @end
@@ -46,16 +49,16 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     
     // init scroll view
     {
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    self.scrollView.delegate = self;
-    self.scrollView.maximumZoomScale = self.maximumZoomScale;
-    self.scrollView.minimumZoomScale = self.minimumZoomScale;
-    self.scrollView.bouncesZoom = self.bouncesZoom;
-    self.scrollView.bounces = self.bounces;
-    self.scrollView.showsHorizontalScrollIndicator = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
-    self.scrollView.showsVerticalScrollIndicator = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
-    self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleHeight;
-    [self addSubview:self.scrollView];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    _scrollView.delegate = self;
+    _scrollView.maximumZoomScale = self.maximumZoomScale;
+    _scrollView.minimumZoomScale = self.minimumZoomScale;
+    _scrollView.bouncesZoom = self.bouncesZoom;
+    _scrollView.bounces = self.bounces;
+    _scrollView.showsHorizontalScrollIndicator = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
+    _scrollView.showsVerticalScrollIndicator = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
+    _scrollView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleHeight;
+    [self addSubview:_scrollView];
     }
     
     // init self.imageView
@@ -67,14 +70,14 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     self.imageView.clipsToBounds = YES;
     self.imageView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleHeight;
     self.imageView.image = nil;
-    [self.scrollView addSubview:self.imageView];
+    [_scrollView addSubview:self.imageView];
     }
     
     CGRect frame = CGRectMake(0, 0, self.imageView.frame.size.width, self.imageView.frame.size.height);
     _blackOverlay = [[DKBlackOverlayView alloc] initWithFrame:frame];
     [self.imageView addSubview:_blackOverlay];
     
-    _overlayView = [[DKImageOverlayView alloc] initWithFrame:frame];
+    _overlayView = [[DKImageOverlayView alloc] initWithFrame:frame scrollView:_scrollView];
     _overlayView.imageView = self;
     [self addSubview:_overlayView];
     
@@ -105,8 +108,8 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     self.imageView.bounds = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     _blackOverlay.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     _blackOverlay.bounds = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    self.scrollView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    self.scrollView.zoomScale = 1.0;
+    _scrollView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    _scrollView.zoomScale = 1.0;
     _overlayView.alpha = 0.0;
     _blackOverlay.alpha = 0.0;
 }
@@ -124,13 +127,13 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     
     // upate the image frame and scrollview
     CGRect contentFrame = [self insideFitImageSize];
-    self.imageView.frame = CGRectMake(self.scrollView.frame.size.width * 0.5 - contentFrame.size.width * 0.5,
-                                      self.scrollView.frame.size.height * 0.5 - contentFrame.size.height * 0.5,
+    self.imageView.frame = CGRectMake(_scrollView.frame.size.width * 0.5 - contentFrame.size.width * 0.5,
+                                      _scrollView.frame.size.height * 0.5 - contentFrame.size.height * 0.5,
                                       contentFrame.size.width, contentFrame.size.height);
-    self.scrollView.contentSize = contentFrame.size;
+    _scrollView.contentSize = contentFrame.size;
     
     // update the overlay without animation
-    _overlayView.frame = CGRectMake(0, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+    _overlayView.frame = CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height);
     [_overlayView updateOverlay:NO];
     [self updateBlackOverlay];
 }
@@ -149,22 +152,22 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 }
 
 - (CGFloat)zoomScale {
-    return self.scrollView.zoomScale;
+    return _scrollView.zoomScale;
 }
 
 - (void)setMaximumZoomScale:(CGFloat)maximumZoomScale {
     _maximumZoomScale = maximumZoomScale;
-    self.scrollView.maximumZoomScale = maximumZoomScale;
+    _scrollView.maximumZoomScale = maximumZoomScale;
 }
 
 - (void)setMinimumZoomScale:(CGFloat)minimumZoomScale {
     _minimumZoomScale = minimumZoomScale;
-    self.scrollView.minimumZoomScale = minimumZoomScale;
+    _scrollView.minimumZoomScale = minimumZoomScale;
 }
 
 - (void)setBounces:(BOOL)bounces {
     _bounces = bounces;
-    self.scrollView.bounces = bounces;
+    _scrollView.bounces = bounces;
 }
 
 - (void)setContentMode:(UIViewContentMode)contentMode {
@@ -213,12 +216,12 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 }
 
 - (CGSize)updatedScrollViewContentSize {
-    CGSize contentSize = self.scrollView.contentSize;
+    CGSize contentSize = _scrollView.contentSize;
     // add delta
     CGRect overlayFrame = [_overlayView overlayFrame];
     
-    contentSize.width = self.imageView.frame.size.width + (self.scrollView.frame.size.width - overlayFrame.size.width);
-    contentSize.height = self.imageView.frame.size.height + (self.scrollView.frame.size.height - overlayFrame.size.height);
+    contentSize.width = self.imageView.frame.size.width + (_scrollView.frame.size.width - overlayFrame.size.width);
+    contentSize.height = self.imageView.frame.size.height + (_scrollView.frame.size.height - overlayFrame.size.height);
     
     // for small picture AND/OR extreme zoom out
     contentSize.width = MAX(contentSize.width, self.frame.size.width);
@@ -232,8 +235,8 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     [_overlayView updateOverlay:YES];
 
     // make the change
-    [self.scrollView setContentSize:[self updatedScrollViewContentSize]];
-    self.imageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5, self.scrollView.contentSize.height * 0.5);
+    [_scrollView setContentSize:[self updatedScrollViewContentSize]];
+    self.imageView.center = CGPointMake(_scrollView.contentSize.width * 0.5, _scrollView.contentSize.height * 0.5);
     [self updateBlackOverlay];
     if (self.delegate && [self.delegate respondsToSelector:@selector(imageViewDidEndZooming:atScale:)])
         [self.delegate imageViewDidEndZooming:self atScale:self.zoomScale];
@@ -258,8 +261,8 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     [UIView animateWithDuration:0.3 animations:^{
         _overlayView.alpha = 1.0;
         _blackOverlay.alpha = 1.0;
-        [self.scrollView setContentSize:[self updatedScrollViewContentSize]];
-        self.imageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5, self.scrollView.contentSize.height * 0.5);
+        [_scrollView setContentSize:[self updatedScrollViewContentSize]];
+        self.imageView.center = CGPointMake(_scrollView.contentSize.width * 0.5, _scrollView.contentSize.height * 0.5);
         [self updateBlackOverlay];
     } completion:^(BOOL finished) {
         _overlayView.alpha = 1.0;
@@ -311,12 +314,12 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 - (CGRect)visibleRectForCGRect:(CGRect)rect {
     // get the position of the picture inside of the UIImageView
     CGRect margin = [self insideFitImageSize];
-    CGFloat realXMargin = margin.origin.x * self.scrollView.zoomScale;
-    CGFloat realYMargin = margin.origin.y * self.scrollView.zoomScale;
+    CGFloat realXMargin = margin.origin.x * _scrollView.zoomScale;
+    CGFloat realYMargin = margin.origin.y * _scrollView.zoomScale;
     
     // create the visible rect
-    CGRect visibleRect = CGRectMake((self.scrollView.contentOffset.x - self.imageView.frame.origin.x) + rect.origin.x - realXMargin,
-                                    (self.scrollView.contentOffset.y - self.imageView.frame.origin.y) + rect.origin.y - realYMargin,
+    CGRect visibleRect = CGRectMake((_scrollView.contentOffset.x - self.imageView.frame.origin.x) + rect.origin.x - realXMargin,
+                                    (_scrollView.contentOffset.y - self.imageView.frame.origin.y) + rect.origin.y - realYMargin,
                                     rect.size.width,
                                     rect.size.height);
     return visibleRect;
@@ -327,7 +330,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     // calculate the Y scale ratio for the image
     
     CGRect fitRect = [self insideFitImageSize];
-    CGFloat displayedHeight =  fitRect.size.height * self.scrollView.zoomScale;
+    CGFloat displayedHeight =  fitRect.size.height * _scrollView.zoomScale;
     
     return self.imageView.image.size.height / displayedHeight;
 }
@@ -337,7 +340,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     // calculate the X scale ratio for the image
     
     CGRect fitRect = [self insideFitImageSize];
-    CGFloat displayedWidth = fitRect.size.width * self.scrollView.zoomScale;
+    CGFloat displayedWidth = fitRect.size.width * _scrollView.zoomScale;
     
     return self.imageView.image.size.width / displayedWidth;
 }

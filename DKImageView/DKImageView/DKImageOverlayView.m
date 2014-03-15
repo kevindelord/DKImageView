@@ -12,6 +12,7 @@
 
 @interface DKImageOverlayView () {
     CGRect          _croppedFrame;
+    UIScrollView *  _scrollView;
 }
 
 @end
@@ -24,12 +25,17 @@
 #pragma mark - Init methods
 
 - (id)initWithFrame:(CGRect)frame {
+    return nil;
+}
+
+- (id)initWithFrame:(CGRect)frame scrollView:(UIScrollView *)scrollView {
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = K_OVERLAY_INTERACTION;
         if (K_VERBOSE_OVERLAY)
             self.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.2];
         
+        _scrollView = scrollView;
         _overlay = [[DKOverlayView alloc] initWithFrame:CGRectMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5, 0, 0)];
         [self addSubview:_overlay];
         _croppedFrame = CGRectMake(0, 0, 0, 0);
@@ -94,12 +100,12 @@
 - (CGRect)containerFrame {
     return CGRectMake(// image.x - offset.x
                       // has to be superior than 0
-                      MAX(self.imageView.imageView.frame.origin.x - self.imageView.scrollView.contentOffset.x, 0.0f),
-                      MAX(self.imageView.imageView.frame.origin.y - self.imageView.scrollView.contentOffset.y, 0.0f),
+                      MAX(self.imageView.imageView.frame.origin.x - _scrollView.contentOffset.x, 0.0f),
+                      MAX(self.imageView.imageView.frame.origin.y - _scrollView.contentOffset.y, 0.0f),
                       // (image.width + image.x) - MAX(image.x, offset.x)
                       // has to be inferior than self.frame.width
-                      MIN((self.imageView.imageView.frame.size.width  + self.imageView.imageView.frame.origin.x) - MAX(self.imageView.imageView.frame.origin.x, self.imageView.scrollView.contentOffset.x), self.frame.size.width),
-                      MIN((self.imageView.imageView.frame.size.height + self.imageView.imageView.frame.origin.y) - MAX(self.imageView.imageView.frame.origin.y, self.imageView.scrollView.contentOffset.y), self.frame.size.height));
+                      MIN((self.imageView.imageView.frame.size.width  + self.imageView.imageView.frame.origin.x) - MAX(self.imageView.imageView.frame.origin.x, _scrollView.contentOffset.x), self.frame.size.width),
+                      MIN((self.imageView.imageView.frame.size.height + self.imageView.imageView.frame.origin.y) - MAX(self.imageView.imageView.frame.origin.y, _scrollView.contentOffset.y), self.frame.size.height));
 }
 
 - (CGRect)insideImageFrame {
@@ -148,10 +154,10 @@
 }
 
 - (CGRect)overlayFrameInsideContainer {
-    CGFloat zoomScale = self.imageView.scrollView.zoomScale;
+    CGFloat zoomScale = _scrollView.zoomScale;
     
-    CGFloat x = self.imageView.scrollView.contentOffset.x / zoomScale;
-    CGFloat y = self.imageView.scrollView.contentOffset.y / zoomScale;
+    CGFloat x = _scrollView.contentOffset.x / zoomScale;
+    CGFloat y = _scrollView.contentOffset.y / zoomScale;
     CGFloat h = self.overlayFrame.size.height / zoomScale;
     CGFloat w = self.overlayFrame.size.width / zoomScale;
 

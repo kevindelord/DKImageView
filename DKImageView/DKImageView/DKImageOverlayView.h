@@ -18,6 +18,8 @@
 @property (nonatomic, retain) DKOverlayView *   overlay;
 @property (nonatomic, retain) DKImageView *     imageView;
 
+- (id)initWithFrame:(CGRect)frame scrollView:(UIScrollView *)scrollView;
+
 - (CGRect)overlayFrame;
 - (CGRect)croppedFrame;
 - (CGRect)overlayFrameInsideContainer;
