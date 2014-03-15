@@ -10,4 +10,16 @@
 
 @interface DKSideViewController : UIViewController
 
+@property (nonatomic, retain) IBOutlet UIButton *bouncesYES;
+@property (nonatomic, retain) IBOutlet UIButton *bouncesNO;
+@property (nonatomic, retain) IBOutlet UIButton *bouncesZoomYES;
+@property (nonatomic, retain) IBOutlet UIButton *bouncesZoomNO;
+@property (nonatomic, retain) IBOutlet UIButton *overZoomColorBlue;
+@property (nonatomic, retain) IBOutlet UIButton *overZoomColorDefault;
+@property (nonatomic, retain) IBOutlet UIButton *croppingColorGreen;
+@property (nonatomic, retain) IBOutlet UIButton *croppingColorDefault;
+@property (nonatomic, retain) IBOutlet UIButton *ratioNone;
+@property (nonatomic, retain) IBOutlet UIButton *ratio16_9;
+@property (nonatomic, retain) IBOutlet UIButton *ratio4_3;
+
 @end

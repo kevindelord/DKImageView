@@ -36,6 +36,30 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 #pragma mark - Init methods
 
+- (void)initScrollView {
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    _scrollView.delegate = self;
+    _scrollView.maximumZoomScale = self.maximumZoomScale;
+    _scrollView.minimumZoomScale = self.minimumZoomScale;
+    _scrollView.bouncesZoom = self.bouncesZoom;
+    _scrollView.bounces = self.bounces;
+    _scrollView.showsHorizontalScrollIndicator = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
+    _scrollView.showsVerticalScrollIndicator = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
+    _scrollView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleHeight;
+    [self addSubview:_scrollView];
+}
+
+- (void)initImageView {
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    _imageView.multipleTouchEnabled = YES;
+    _imageView.userInteractionEnabled = YES;
+    _imageView.contentMode = self.contentMode;
+    _imageView.clipsToBounds = YES;
+    _imageView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleHeight;
+    _imageView.image = nil;
+    [_scrollView addSubview:_imageView];
+}
+
 - (void)setup {
     // init self.view
     self.clipsToBounds = YES;
@@ -48,35 +72,17 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     self.contentMode = UIViewContentModeScaleAspectFit;
     
     // init scroll view
-    {
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    _scrollView.delegate = self;
-    _scrollView.maximumZoomScale = self.maximumZoomScale;
-    _scrollView.minimumZoomScale = self.minimumZoomScale;
-    _scrollView.bouncesZoom = self.bouncesZoom;
-    _scrollView.bounces = self.bounces;
-    _scrollView.showsHorizontalScrollIndicator = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
-    _scrollView.showsVerticalScrollIndicator = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
-    _scrollView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleHeight;
-    [self addSubview:_scrollView];
-    }
-    
+    [self initScrollView];
+
     // init _imageView
-    {
-    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    _imageView.multipleTouchEnabled = YES;
-    _imageView.userInteractionEnabled = YES;
-    _imageView.contentMode = self.contentMode;
-    _imageView.clipsToBounds = YES;
-    _imageView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleHeight;
-    _imageView.image = nil;
-    [_scrollView addSubview:_imageView];
-    }
-    
+    [self initImageView];
+
+    // black Overlay
     CGRect frame = CGRectMake(0, 0, _imageView.frame.size.width, _imageView.frame.size.height);
     _blackOverlay = [[DKBlackOverlayView alloc] initWithFrame:frame];
     [_imageView addSubview:_blackOverlay];
-    
+
+    // cropping Frame
     _overlayView = [[DKImageOverlayView alloc] initWithFrame:frame scrollView:_scrollView imageView:_imageView];
     _overlayView.dkImageView = self;
     [self addSubview:_overlayView];
