@@ -23,8 +23,6 @@
 
 @interface DKImageView : UIView <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
-@property (nonatomic, retain) UIImageView *             imageView;
-
 @property (nonatomic, retain) id<DKImageViewDelegate>   delegate;
 
 @property (nonatomic) CGFloat                           maximumZoomScale;

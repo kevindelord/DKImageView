@@ -16,9 +16,9 @@
 @interface DKImageOverlayView : UIView
 
 @property (nonatomic, retain) DKOverlayView *   overlay;
-@property (nonatomic, retain) DKImageView *     imageView;
+@property (nonatomic, retain) DKImageView *     dkImageView;
 
-- (id)initWithFrame:(CGRect)frame scrollView:(UIScrollView *)scrollView;
+- (id)initWithFrame:(CGRect)frame scrollView:(UIScrollView *)scrollView imageView:(UIImageView *)imageView;
 
 - (CGRect)overlayFrame;
 - (CGRect)croppedFrame;

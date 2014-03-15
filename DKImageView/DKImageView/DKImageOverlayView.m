@@ -13,6 +13,7 @@
 @interface DKImageOverlayView () {
     CGRect          _croppedFrame;
     UIScrollView *  _scrollView;
+    UIImageView *   _imageView;
 }
 
 @end
@@ -20,7 +21,7 @@
 @implementation DKImageOverlayView
 
 @synthesize overlay = _overlay;
-@synthesize imageView;
+@synthesize dkImageView;
 
 #pragma mark - Init methods
 
@@ -28,13 +29,14 @@
     return nil;
 }
 
-- (id)initWithFrame:(CGRect)frame scrollView:(UIScrollView *)scrollView {
+- (id)initWithFrame:(CGRect)frame scrollView:(UIScrollView *)scrollView imageView:(UIImageView *)imageView {
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = K_OVERLAY_INTERACTION;
         if (K_VERBOSE_OVERLAY)
             self.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.2];
         
+        _imageView = imageView;
         _scrollView = scrollView;
         _overlay = [[DKOverlayView alloc] initWithFrame:CGRectMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5, 0, 0)];
         [self addSubview:_overlay];
@@ -100,17 +102,17 @@
 - (CGRect)containerFrame {
     return CGRectMake(// image.x - offset.x
                       // has to be superior than 0
-                      MAX(self.imageView.imageView.frame.origin.x - _scrollView.contentOffset.x, 0.0f),
-                      MAX(self.imageView.imageView.frame.origin.y - _scrollView.contentOffset.y, 0.0f),
+                      MAX(_imageView.frame.origin.x - _scrollView.contentOffset.x, 0.0f),
+                      MAX(_imageView.frame.origin.y - _scrollView.contentOffset.y, 0.0f),
                       // (image.width + image.x) - MAX(image.x, offset.x)
                       // has to be inferior than self.frame.width
-                      MIN((self.imageView.imageView.frame.size.width  + self.imageView.imageView.frame.origin.x) - MAX(self.imageView.imageView.frame.origin.x, _scrollView.contentOffset.x), self.frame.size.width),
-                      MIN((self.imageView.imageView.frame.size.height + self.imageView.imageView.frame.origin.y) - MAX(self.imageView.imageView.frame.origin.y, _scrollView.contentOffset.y), self.frame.size.height));
+                      MIN((_imageView.frame.size.width  + _imageView.frame.origin.x) - MAX(_imageView.frame.origin.x, _scrollView.contentOffset.x), self.frame.size.width),
+                      MIN((_imageView.frame.size.height + _imageView.frame.origin.y) - MAX(_imageView.frame.origin.y, _scrollView.contentOffset.y), self.frame.size.height));
 }
 
 - (CGRect)insideImageFrame {
-    CGRect insideView = [self.imageView insideFitImageSize];
-    CGRect container = self.imageView.imageView.frame;
+    CGRect insideView = [self.dkImageView insideFitImageSize];
+    CGRect container = _imageView.frame;
     
     return CGRectMake((int)(container.origin.x + insideView.origin.x * 2),
                       (int)(container.origin.y + insideView.origin.y),
@@ -119,6 +121,13 @@
 }
 
 #pragma mark - drawing methods
+
+- (void)updateOverlayWithOverZoomedVerification:(BOOL)animated {
+    BOOL overZoomed = NO;
+    if (self.dkImageView.delegate && [self.dkImageView.delegate respondsToSelector:@selector(isOverZoomed)])
+        overZoomed = [self.dkImageView.delegate isOverZoomed];
+    [_overlay updateWithFrame:_croppedFrame animated:animated overZoomed:overZoomed];
+}
 
 - (void)updateOverlayAfterDragging:(BOOL)animated {
     
@@ -137,20 +146,14 @@
         // inside the image frame
         if ([self isFrame:f insideOfContainer:container] == false) {
             _croppedFrame = [self setFrame:f insideOfContainer:container];
-            BOOL overZoomed = NO;
-            if (self.imageView.delegate && [self.imageView.delegate respondsToSelector:@selector(isOverZoomed)])
-                overZoomed = [self.imageView.delegate isOverZoomed];
-            [_overlay updateWithFrame:_croppedFrame animated:animated overZoomed:overZoomed];
+            [self updateOverlayWithOverZoomedVerification:animated];
         }
     }
 }
 
 - (void)updateOverlay:(BOOL)animated {
     _croppedFrame = [self frameForCurrentRatio];
-    BOOL overZoomed = NO;
-    if (self.imageView.delegate && [self.imageView.delegate respondsToSelector:@selector(isOverZoomed)])
-        overZoomed = [self.imageView.delegate isOverZoomed];
-    [_overlay updateWithFrame:_croppedFrame animated:animated overZoomed:overZoomed];
+    [self updateOverlayWithOverZoomedVerification:animated];
 }
 
 - (CGRect)overlayFrameInsideContainer {
@@ -230,7 +233,7 @@
     } else {
         // optionId == K_RATIO_ID_NO_FORMAT -> No specific Format
         //      OR
-        // No ratio selected => self.imageView.ratio == null;
+        // No ratio selected => self.dkImageView.ratio == null;
         //
         // then return the original size
     }
@@ -262,7 +265,7 @@
     CGSize sz = insideImageFrame.size;
     
     // size for the current ratio
-    sz = [DKImageOverlayView adjustSize:sz toRatio:self.imageView.ratio];
+    sz = [DKImageOverlayView adjustSize:sz toRatio:self.dkImageView.ratio];
 
     // adjust the frame to the inside image in case of small picture
     sz = [DKImageOverlayView adjustSize:sz toCGRect:insideImageFrame];

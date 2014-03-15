@@ -17,7 +17,7 @@
     DKRatio *               _ratio;
     
     UIScrollView *          _scrollView;
-//    UIImageView *           _imageView;
+    UIImageView *           _imageView;
 }
 
 @end
@@ -61,24 +61,24 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     [self addSubview:_scrollView];
     }
     
-    // init self.imageView
+    // init _imageView
     {
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    self.imageView.multipleTouchEnabled = YES;
-    self.imageView.userInteractionEnabled = YES;
-    self.imageView.contentMode = self.contentMode;
-    self.imageView.clipsToBounds = YES;
-    self.imageView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleHeight;
-    self.imageView.image = nil;
-    [_scrollView addSubview:self.imageView];
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    _imageView.multipleTouchEnabled = YES;
+    _imageView.userInteractionEnabled = YES;
+    _imageView.contentMode = self.contentMode;
+    _imageView.clipsToBounds = YES;
+    _imageView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleHeight;
+    _imageView.image = nil;
+    [_scrollView addSubview:_imageView];
     }
     
-    CGRect frame = CGRectMake(0, 0, self.imageView.frame.size.width, self.imageView.frame.size.height);
+    CGRect frame = CGRectMake(0, 0, _imageView.frame.size.width, _imageView.frame.size.height);
     _blackOverlay = [[DKBlackOverlayView alloc] initWithFrame:frame];
-    [self.imageView addSubview:_blackOverlay];
+    [_imageView addSubview:_blackOverlay];
     
-    _overlayView = [[DKImageOverlayView alloc] initWithFrame:frame scrollView:_scrollView];
-    _overlayView.imageView = self;
+    _overlayView = [[DKImageOverlayView alloc] initWithFrame:frame scrollView:_scrollView imageView:_imageView];
+    _overlayView.dkImageView = self;
     [self addSubview:_overlayView];
     
     self.ratio = [DKRatio ratioForType:DKRatioTypeNone];
@@ -104,8 +104,8 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 }
 
 - (void)resetContainers {
-    self.imageView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    self.imageView.bounds = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    _imageView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    _imageView.bounds = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     _blackOverlay.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     _blackOverlay.bounds = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     _scrollView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
@@ -122,12 +122,12 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
     // reset imageView and ScrollView frames. Useful after the user select another picture
     [self resetContainers];
-    if (self.imageView.image == nil)
+    if (_imageView.image == nil)
         return ;
     
     // upate the image frame and scrollview
     CGRect contentFrame = [self insideFitImageSize];
-    self.imageView.frame = CGRectMake(_scrollView.frame.size.width * 0.5 - contentFrame.size.width * 0.5,
+    _imageView.frame = CGRectMake(_scrollView.frame.size.width * 0.5 - contentFrame.size.width * 0.5,
                                       _scrollView.frame.size.height * 0.5 - contentFrame.size.height * 0.5,
                                       contentFrame.size.width, contentFrame.size.height);
     _scrollView.contentSize = contentFrame.size;
@@ -139,16 +139,16 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 }
 
 - (UIImage *)image {
-    return self.imageView.image;
+    return _imageView.image;
 }
 
 - (void)setImage:(UIImage *)image {
-    self.imageView.image = image;
+    _imageView.image = image;
     [self resetContainers];
 }
 
 - (CGRect)insideFitImageSize {
-    return AVMakeRectWithAspectRatioInsideRect(self.imageView.image.size, self.imageView.bounds);
+    return AVMakeRectWithAspectRatioInsideRect(_imageView.image.size, _imageView.bounds);
 }
 
 - (CGFloat)zoomScale {
@@ -172,7 +172,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 - (void)setContentMode:(UIViewContentMode)contentMode {
     _contentMode = contentMode;
-    self.imageView.contentMode = contentMode;
+    _imageView.contentMode = contentMode;
 #warning TODO
 }
 
@@ -197,7 +197,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 #pragma mark - rotatin & zooming methods
 
 - (void)updateBlackOverlay {
-    _blackOverlay.frame = CGRectMake(0, 0, self.imageView.frame.size.width, self.imageView.frame.size.height);
+    _blackOverlay.frame = CGRectMake(0, 0, _imageView.frame.size.width, _imageView.frame.size.height);
     [_blackOverlay updateWithFrame:[_overlayView overlayFrameInsideContainer]];
 }
 
@@ -206,7 +206,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 }
 
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return self.imageView;
+    return _imageView;
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -220,8 +220,8 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     // add delta
     CGRect overlayFrame = [_overlayView overlayFrame];
     
-    contentSize.width = self.imageView.frame.size.width + (_scrollView.frame.size.width - overlayFrame.size.width);
-    contentSize.height = self.imageView.frame.size.height + (_scrollView.frame.size.height - overlayFrame.size.height);
+    contentSize.width = _imageView.frame.size.width + (_scrollView.frame.size.width - overlayFrame.size.width);
+    contentSize.height = _imageView.frame.size.height + (_scrollView.frame.size.height - overlayFrame.size.height);
     
     // for small picture AND/OR extreme zoom out
     contentSize.width = MAX(contentSize.width, self.frame.size.width);
@@ -236,7 +236,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
     // make the change
     [_scrollView setContentSize:[self updatedScrollViewContentSize]];
-    self.imageView.center = CGPointMake(_scrollView.contentSize.width * 0.5, _scrollView.contentSize.height * 0.5);
+    _imageView.center = CGPointMake(_scrollView.contentSize.width * 0.5, _scrollView.contentSize.height * 0.5);
     [self updateBlackOverlay];
     if (self.delegate && [self.delegate respondsToSelector:@selector(imageViewDidEndZooming:atScale:)])
         [self.delegate imageViewDidEndZooming:self atScale:self.zoomScale];
@@ -262,7 +262,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
         _overlayView.alpha = 1.0;
         _blackOverlay.alpha = 1.0;
         [_scrollView setContentSize:[self updatedScrollViewContentSize]];
-        self.imageView.center = CGPointMake(_scrollView.contentSize.width * 0.5, _scrollView.contentSize.height * 0.5);
+        _imageView.center = CGPointMake(_scrollView.contentSize.width * 0.5, _scrollView.contentSize.height * 0.5);
         [self updateBlackOverlay];
     } completion:^(BOOL finished) {
         _overlayView.alpha = 1.0;
@@ -273,10 +273,10 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 #pragma mark - Crop Image
 
 - (NSDictionary *)croppingCoordinates {
-    if (!self.imageView.image) return nil;
+    if (!_imageView.image) return nil;
     if (K_VERBOSE_CROPPING) {
         NSLog(@"----------------------------------");
-        NSLog(@"orignal pricture: %@", [NSValue valueWithCGSize:self.imageView.image.size]);
+        NSLog(@"orignal pricture: %@", [NSValue valueWithCGSize:_imageView.image.size]);
     }
     
     CGRect ratioRect = [_overlayView croppedFrame];
@@ -287,16 +287,16 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
         NSLog(@"cropped frame real size: %@", [NSValue valueWithCGRect:visibleRect]);
     }
     
-    CGFloat top = (visibleRect.origin.y * 100) / self.imageView.image.size.height;
-    CGFloat left = (visibleRect.origin.x * 100) / self.imageView.image.size.width;
-    CGFloat width = (visibleRect.size.width * 100) / self.imageView.image.size.width;
-    CGFloat height = (visibleRect.size.height * 100) / self.imageView.image.size.height;
+    CGFloat top = (visibleRect.origin.y * 100) / _imageView.image.size.height;
+    CGFloat left = (visibleRect.origin.x * 100) / _imageView.image.size.width;
+    CGFloat width = (visibleRect.size.width * 100) / _imageView.image.size.width;
+    CGFloat height = (visibleRect.size.height * 100) / _imageView.image.size.height;
     
     if (K_VERBOSE_CROPPING) {
-        NSLog(@"TOP  : %f = (%f * 100) / %f", top, visibleRect.origin.y, self.imageView.image.size.height);
-        NSLog(@"LEFT  : %f = (%f * 100) / %f", top, visibleRect.origin.x, self.imageView.image.size.width);
-        NSLog(@"WIDTH  : %f = (%f * 100) / %f", top, visibleRect.size.width, self.imageView.image.size.width);
-        NSLog(@"HEIGHT  : %f = (%f * 100) / %f", top, visibleRect.size.height, self.imageView.image.size.height);
+        NSLog(@"TOP  : %f = (%f * 100) / %f", top, visibleRect.origin.y, _imageView.image.size.height);
+        NSLog(@"LEFT  : %f = (%f * 100) / %f", top, visibleRect.origin.x, _imageView.image.size.width);
+        NSLog(@"WIDTH  : %f = (%f * 100) / %f", top, visibleRect.size.width, _imageView.image.size.width);
+        NSLog(@"HEIGHT  : %f = (%f * 100) / %f", top, visibleRect.size.height, _imageView.image.size.height);
         
         NSLog(@"percentage = top: %f, left: %f, width: %f, height: %f", top, left, width, height);
     }
@@ -318,8 +318,8 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     CGFloat realYMargin = margin.origin.y * _scrollView.zoomScale;
     
     // create the visible rect
-    CGRect visibleRect = CGRectMake((_scrollView.contentOffset.x - self.imageView.frame.origin.x) + rect.origin.x - realXMargin,
-                                    (_scrollView.contentOffset.y - self.imageView.frame.origin.y) + rect.origin.y - realYMargin,
+    CGRect visibleRect = CGRectMake((_scrollView.contentOffset.x - _imageView.frame.origin.x) + rect.origin.x - realXMargin,
+                                    (_scrollView.contentOffset.y - _imageView.frame.origin.y) + rect.origin.y - realYMargin,
                                     rect.size.width,
                                     rect.size.height);
     return visibleRect;
@@ -332,7 +332,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     CGRect fitRect = [self insideFitImageSize];
     CGFloat displayedHeight =  fitRect.size.height * _scrollView.zoomScale;
     
-    return self.imageView.image.size.height / displayedHeight;
+    return _imageView.image.size.height / displayedHeight;
 }
 
 - (CGFloat)scaleX {
@@ -342,7 +342,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     CGRect fitRect = [self insideFitImageSize];
     CGFloat displayedWidth = fitRect.size.width * _scrollView.zoomScale;
     
-    return self.imageView.image.size.width / displayedWidth;
+    return _imageView.image.size.width / displayedWidth;
 }
 
 - (UIImage *)croppedImage {
@@ -352,8 +352,8 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     visibleRect = GKScaleRect(visibleRect, [self scaleX], [self scaleY]);
     
     // crop the image    
-    CGImageRef imageRef = CGImageCreateWithImageInRect([self.imageView.image CGImage], visibleRect);
-    UIImage *result = [UIImage imageWithCGImage:imageRef scale:self.imageView.image.scale orientation:self.imageView.image.imageOrientation];
+    CGImageRef imageRef = CGImageCreateWithImageInRect([_imageView.image CGImage], visibleRect);
+    UIImage *result = [UIImage imageWithCGImage:imageRef scale:_imageView.image.scale orientation:_imageView.image.imageOrientation];
 
 //    NSLog(@"----------------------------------");
 //    NSLog(@"visible rect: %@", [NSValue valueWithCGRect:visibleRect]);
