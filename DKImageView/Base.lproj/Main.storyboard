@@ -21,7 +21,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wl9-bE-3gc" customClass="DKImageView">
-                                <rect key="frame" x="20" y="65" width="280" height="483"/>
+                                <rect key="frame" x="20" y="80" width="280" height="468"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -45,8 +45,8 @@
                             <constraint firstAttribute="trailing" secondItem="wl9-bE-3gc" secondAttribute="trailing" constant="20" id="MQl-yG-Yka"/>
                             <constraint firstItem="ONv-jZ-V70" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="R22-0o-U12"/>
                             <constraint firstItem="ONv-jZ-V70" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="pKM-6Q-nc6"/>
+                            <constraint firstItem="wl9-bE-3gc" firstAttribute="top" secondItem="ONv-jZ-V70" secondAttribute="bottom" constant="20" id="tex-YZ-8v5"/>
                             <constraint firstItem="Y5i-tw-wYe" firstAttribute="top" secondItem="7PV-We-TZQ" secondAttribute="bottom" id="yyT-BE-QTw"/>
-                            <constraint firstItem="wl9-bE-3gc" firstAttribute="top" secondItem="Hki-gT-v2B" secondAttribute="bottom" constant="45" id="ziW-Y4-jYb"/>
                         </constraints>
                     </view>
                     <connections>

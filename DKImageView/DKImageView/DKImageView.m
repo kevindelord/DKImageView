@@ -171,9 +171,20 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     _scrollView.minimumZoomScale = minimumZoomScale;
 }
 
+- (BOOL)bounces {
+    return _scrollView.bounces;
+}
+
 - (void)setBounces:(BOOL)bounces {
-    _bounces = bounces;
     _scrollView.bounces = bounces;
+}
+
+- (BOOL)bouncesZoom {
+    return _scrollView.bouncesZoom;
+}
+
+- (void)setBouncesZoom:(BOOL)bouncesZoom {
+    _scrollView.bouncesZoom = bouncesZoom;
 }
 
 - (void)setContentMode:(UIViewContentMode)contentMode {
