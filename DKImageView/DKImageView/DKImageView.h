@@ -9,25 +9,37 @@
 #import <UIKit/UIKit.h>
 #import "DKImageOverlayView.h"
 
-#define K_ZOOM_IMAGE_VIEW_DEBUG_STATE       NO
+#define K_ZOOM_IMAGE_VIEW_DEBUG_STATE       YES
 #define K_ZOOM_IMAGE_VIEW_MAX_ZOOM          10.0
 #define K_ZOOM_IMAGE_VIEW_MIN_ZOOM          1.0
 
+@class DKImageView;
+
 @protocol DKImageViewDelegate <NSObject>
-@required
-- (BOOL)overZoomed;
-- (void)didEndUpdateOverlay;
+@optional
+- (BOOL)isOverZoomed;
+- (void)imageViewDidEndZooming:(DKImageView *)imageView atScale:(CGFloat)scale;
 @end
 
 @interface DKImageView : UIView <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
-@property (nonatomic, retain) UIScrollView *scrollView;
-@property (nonatomic, retain) UIImageView *imageView;
+@property (nonatomic, retain) UIScrollView *            scrollView;
+@property (nonatomic, retain) UIImageView *             imageView;
 
 @property (nonatomic, retain) id<DKImageViewDelegate>   delegate;
 
+@property (nonatomic) CGFloat                           maximumZoomScale;
+@property (nonatomic) CGFloat                           minimumZoomScale;
+@property (nonatomic) BOOL                              bounces;
+@property (nonatomic) BOOL                              bouncesZoom;
+@property (nonatomic) UIViewContentMode                 contentMode;
+@property (nonatomic, retain) UIImage *                 image;
+
+@property (nonatomic, retain) UIColor *                 croppingFrameColor;
+@property (nonatomic, retain) UIColor *                 overZoomedColor;
+@property (nonatomic, retain) NSString *                overZoomedText;
+
 // setter
-- (void)setImage:(UIImage *)image;
 - (void)setRatioForType:(DKRatioType)type;
 
 // cropping
@@ -35,6 +47,7 @@
 - (NSDictionary *)croppingCoordinates;
 
 // getter
+- (CGFloat)zoomScale;
 - (CGRect)insideFitImageSize;
 - (DKRatio *)ratio;
 

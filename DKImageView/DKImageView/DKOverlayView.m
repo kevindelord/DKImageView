@@ -22,6 +22,9 @@
 
 @implementation DKOverlayView
 
+@synthesize color = _color;
+@synthesize overZoomedColor = _overZoomedColor;
+
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -29,19 +32,20 @@
         if (K_VERBOSE_OVERLAY)
             self.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.2];
         
-        UIColor *color = [UIColor whiteColor];
+        _color = [UIColor whiteColor];
+        _overZoomedColor = [UIColor colorWithRed:253./255. green:114./255. blue:1./255. alpha:1.0];
 
         top = [[UIView alloc] init];
-        top.backgroundColor = color;
+        top.backgroundColor = _color;
         [self addSubview:top];
         bottom = [[UIView alloc] init];
-        bottom.backgroundColor = color;
+        bottom.backgroundColor = _color;
         [self addSubview:bottom];
         left = [[UIView alloc] init];
-        left.backgroundColor = color;
+        left.backgroundColor = _color;
         [self addSubview:left];
         right = [[UIView alloc] init];
-        right.backgroundColor = color;
+        right.backgroundColor = _color;
         [self addSubview:right];
     }
     return self;
@@ -49,7 +53,7 @@
 
 - (void)updateWithFrame:(CGRect)newFrame overZoomed:(BOOL)overZoomed {
     
-    UIColor *color = overZoomed ? [UIColor colorWithRed:253./255. green:114./255. blue:1./255. alpha:1.0] : [UIColor whiteColor];
+    UIColor *color = overZoomed ? _overZoomedColor : _color;
     top.backgroundColor = color;
     bottom.backgroundColor = color;
     left.backgroundColor = color;

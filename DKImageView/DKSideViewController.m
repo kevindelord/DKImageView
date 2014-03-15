@@ -10,7 +10,10 @@
 #import "DKImageView.h"
 #import "DKAppDelegate.h"
 
-@interface DKSideViewController ()
+@interface DKSideViewController () {
+    UIColor *_defaultCroppingFrameColor;
+    UIColor *_defaultOverZoomedColor;
+}
 
 @end
 
@@ -18,7 +21,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    _defaultCroppingFrameColor = self.imageView.croppingFrameColor;
+    _defaultOverZoomedColor = self.imageView.overZoomedColor;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,5 +43,20 @@
     [self.imageView setRatioForType:DKRatioType4_3];
 }
 
+- (IBAction)croppingFrameGreenColor {
+    self.imageView.croppingFrameColor = [UIColor greenColor];
+}
+
+- (IBAction)croppingFrameDefaultColor {
+    self.imageView.croppingFrameColor = _defaultCroppingFrameColor;
+}
+
+- (IBAction)overZoomedBlueColor {
+    self.imageView.overZoomedColor = [UIColor blueColor];
+}
+
+- (IBAction)overZoomedDefaultColor {
+    self.imageView.overZoomedColor = _defaultOverZoomedColor;
+}
 
 @end

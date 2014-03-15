@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "DKRatio.h"
+#import "DKOverlayView.h"
+#import "DKImageView.h"
 
 @class DKImageView;
 
 @interface DKImageOverlayView : UIView
 
-@property (nonatomic, retain) DKImageView *imageView;
+@property (nonatomic, retain) DKOverlayView *   overlay;
+@property (nonatomic, retain) DKImageView *     imageView;
 
 - (CGRect)overlayFrame;
 - (CGRect)croppedFrame;

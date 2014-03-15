@@ -7,13 +7,10 @@
 //
 
 #import "DKImageOverlayView.h"
-#import "DKOverlayView.h"
-#import "DKImageView.h"
 
 #define K_TOUCH_DELTA       10
 
 @interface DKImageOverlayView () {
-    DKOverlayView * _overlay;
     CGRect          _croppedFrame;
 }
 
@@ -21,6 +18,7 @@
 
 @implementation DKImageOverlayView
 
+@synthesize overlay = _overlay;
 @synthesize imageView;
 
 #pragma mark - Init methods
@@ -133,14 +131,20 @@
         // inside the image frame
         if ([self isFrame:f insideOfContainer:container] == false) {
             _croppedFrame = [self setFrame:f insideOfContainer:container];
-            [_overlay updateWithFrame:_croppedFrame animated:animated overZoomed:[self.imageView.delegate overZoomed]];
+            BOOL overZoomed = NO;
+            if (self.imageView.delegate && [self.imageView.delegate respondsToSelector:@selector(isOverZoomed)])
+                overZoomed = [self.imageView.delegate isOverZoomed];
+            [_overlay updateWithFrame:_croppedFrame animated:animated overZoomed:overZoomed];
         }
     }
 }
 
 - (void)updateOverlay:(BOOL)animated {
     _croppedFrame = [self frameForCurrentRatio];
-    [_overlay updateWithFrame:_croppedFrame animated:animated overZoomed:[self.imageView.delegate overZoomed]];
+    BOOL overZoomed = NO;
+    if (self.imageView.delegate && [self.imageView.delegate respondsToSelector:@selector(isOverZoomed)])
+        overZoomed = [self.imageView.delegate isOverZoomed];
+    [_overlay updateWithFrame:_croppedFrame animated:animated overZoomed:overZoomed];
 }
 
 - (CGRect)overlayFrameInsideContainer {

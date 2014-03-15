@@ -21,6 +21,12 @@
 
 @implementation DKImageView
 
+@synthesize minimumZoomScale = _minimumZoomScale;
+@synthesize maximumZoomScale = _maximumZoomScale;
+@synthesize bounces = _bounces;
+@synthesize bouncesZoom = _bouncesZoom;
+@synthesize contentMode = _contentMode;
+
 static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 	return CGRectMake(rect.origin.x * scaleX, rect.origin.y * scaleY, rect.size.width * scaleX, rect.size.height * scaleY);
 }
@@ -33,15 +39,19 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     self.userInteractionEnabled = YES;
     self.backgroundColor = [UIColor clearColor];
     _ratio = nil;
+    self.maximumZoomScale = K_ZOOM_IMAGE_VIEW_MAX_ZOOM;
+    self.minimumZoomScale = K_ZOOM_IMAGE_VIEW_MIN_ZOOM;
+    self.bouncesZoom = self.bounces = NO;
+    self.contentMode = UIViewContentModeScaleAspectFit;
     
     // init scroll view
     {
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     self.scrollView.delegate = self;
-    self.scrollView.maximumZoomScale = K_ZOOM_IMAGE_VIEW_MAX_ZOOM;
-    self.scrollView.minimumZoomScale = K_ZOOM_IMAGE_VIEW_MIN_ZOOM;
-    self.scrollView.bouncesZoom = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
-    self.scrollView.bounces = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
+    self.scrollView.maximumZoomScale = self.maximumZoomScale;
+    self.scrollView.minimumZoomScale = self.minimumZoomScale;
+    self.scrollView.bouncesZoom = self.bouncesZoom;
+    self.scrollView.bounces = self.bounces;
     self.scrollView.showsHorizontalScrollIndicator = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
     self.scrollView.showsVerticalScrollIndicator = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
     self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleHeight;
@@ -53,7 +63,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     self.imageView.multipleTouchEnabled = YES;
     self.imageView.userInteractionEnabled = YES;
-    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.imageView.contentMode = self.contentMode;
     self.imageView.clipsToBounds = YES;
     self.imageView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleHeight;
     self.imageView.image = nil;
@@ -69,7 +79,6 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     [self addSubview:_overlayView];
     
     self.ratio = [DKRatio ratioForType:DKRatioTypeNone];
-
 }
 
 - (void)awakeFromNib {
@@ -126,6 +135,10 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     [self updateBlackOverlay];
 }
 
+- (UIImage *)image {
+    return self.imageView.image;
+}
+
 - (void)setImage:(UIImage *)image {
     self.imageView.image = image;
     [self resetContainers];
@@ -133,6 +146,49 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 - (CGRect)insideFitImageSize {
     return AVMakeRectWithAspectRatioInsideRect(self.imageView.image.size, self.imageView.bounds);
+}
+
+- (CGFloat)zoomScale {
+    return self.scrollView.zoomScale;
+}
+
+- (void)setMaximumZoomScale:(CGFloat)maximumZoomScale {
+    _maximumZoomScale = maximumZoomScale;
+    self.scrollView.maximumZoomScale = maximumZoomScale;
+}
+
+- (void)setMinimumZoomScale:(CGFloat)minimumZoomScale {
+    _minimumZoomScale = minimumZoomScale;
+    self.scrollView.minimumZoomScale = minimumZoomScale;
+}
+
+- (void)setBounces:(BOOL)bounces {
+    _bounces = bounces;
+    self.scrollView.bounces = bounces;
+}
+
+- (void)setContentMode:(UIViewContentMode)contentMode {
+    _contentMode = contentMode;
+    self.imageView.contentMode = contentMode;
+#warning TODO
+}
+
+- (UIColor *)croppingFrameColor {
+    return _overlayView.overlay.color;
+}
+
+- (void)setCroppingFrameColor:(UIColor *)croppingFrameColor {
+    _overlayView.overlay.color = croppingFrameColor;
+    [_overlayView updateOverlay:NO];
+}
+
+- (UIColor *)overZoomedColor {
+    return _overlayView.overlay.overZoomedColor;
+}
+
+- (void)setOverZoomedColor:(UIColor *)overZoomedColor {
+    _overlayView.overlay.overZoomedColor = overZoomedColor;
+    [_overlayView updateOverlay:NO];
 }
 
 #pragma mark - rotatin & zooming methods
@@ -179,8 +235,8 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     [self.scrollView setContentSize:[self updatedScrollViewContentSize]];
     self.imageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5, self.scrollView.contentSize.height * 0.5);
     [self updateBlackOverlay];
-    if (self.delegate)
-        [self.delegate didEndUpdateOverlay];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(imageViewDidEndZooming:atScale:)])
+        [self.delegate imageViewDidEndZooming:self atScale:self.zoomScale];
 }
 
 #pragma mark - Set ratio

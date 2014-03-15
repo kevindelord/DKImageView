@@ -23,6 +23,7 @@
     [super viewDidLoad];
     
     self.imageView.image = [UIImage imageNamed:@"picture.png"];
+    self.imageView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,6 +32,16 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+}
+
+#pragma mark - DKImageView delegate methods
+
+- (BOOL)isOverZoomed {
+    return (self.imageView.zoomScale > 3);
+}
+
+- (void)imageViewDidEndZooming:(DKImageView *)imageView atScale:(CGFloat)scale {
+    // do whatever you want now
 }
 
 @end
