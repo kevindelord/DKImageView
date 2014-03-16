@@ -119,8 +119,6 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     _blackOverlay.alpha = 0.0;
 }
 
-#pragma mark - getter / setter
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     // this is called after the auto-resizing methods have been by called by the xib file.
@@ -143,6 +141,12 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     [self updateBlackOverlay];
 }
 
+- (CGRect)insideFitImageSize {
+    return AVMakeRectWithAspectRatioInsideRect(_imageView.image.size, _imageView.bounds);
+}
+
+#pragma mark - getter / setter
+
 - (UIImage *)image {
     return _imageView.image;
 }
@@ -150,10 +154,6 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 - (void)setImage:(UIImage *)image {
     _imageView.image = image;
     [self resetContainers];
-}
-
-- (CGRect)insideFitImageSize {
-    return AVMakeRectWithAspectRatioInsideRect(_imageView.image.size, _imageView.bounds);
 }
 
 - (CGFloat)zoomScale {
@@ -207,6 +207,33 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 - (void)setOverZoomedColor:(UIColor *)overZoomedColor {
     _overlayView.overlay.overZoomedColor = overZoomedColor;
+    [_overlayView updateOverlay:NO];
+}
+
+- (UIFont *)overZoomedFont {
+    return _overlayView.overlay.overZoomedFont;
+}
+
+- (void)setOverZoomedFont:(UIFont *)overZoomedFont {
+    _overlayView.overlay.overZoomedFont = overZoomedFont;
+    [_overlayView updateOverlay:NO];
+}
+
+- (NSString *)overZoomedText {
+    return _overlayView.overlay.overZoomedText;
+}
+
+- (void)setOverZoomedText:(NSString *)overZoomedText {
+    _overlayView.overlay.overZoomedText = overZoomedText;
+    [_overlayView updateOverlay:NO];
+}
+
+- (UIColor *)overZoomedBackgroundColor {
+    return _overlayView.overlay.overZoomedBackgroundColor;
+}
+
+- (void)setOverZoomedBackgroundColor:(UIColor *)overZoomedBackgroundColor {
+    _overlayView.overlay.overZoomedBackgroundColor = overZoomedBackgroundColor;
     [_overlayView updateOverlay:NO];
 }
 

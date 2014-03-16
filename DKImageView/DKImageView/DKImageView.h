@@ -35,6 +35,8 @@
 @property (nonatomic, retain) UIColor *                 croppingFrameColor;
 @property (nonatomic, retain) UIColor *                 overZoomedColor;
 @property (nonatomic, retain) NSString *                overZoomedText;
+@property (nonatomic, retain) UIFont *                  overZoomedFont;
+@property (nonatomic, retain) UIColor *                 overZoomedBackgroundColor;
 
 // setter
 - (void)setRatioForType:(DKRatioType)type;

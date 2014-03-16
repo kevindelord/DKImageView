@@ -10,11 +10,11 @@
 
 @interface DKOverlayView : UIView
 
-@property (nonatomic, retain) UIColor * color;
-@property (nonatomic, retain) UIColor * overZoomedColor;
-@property (nonatomic, retain) NSString *overZoomedText;
-@property (nonatomic, retain) UIFont *  overZoomedFont;
-@property (nonatomic, retain) UIColor * overZoomedBackgroundColor;
+@property (nonatomic, retain) UIColor *     color;
+@property (nonatomic, retain) UIColor *     overZoomedColor;
+@property (nonatomic, retain) NSString *    overZoomedText;
+@property (nonatomic, retain) UIFont *      overZoomedFont;
+@property (nonatomic, retain) UIColor *     overZoomedBackgroundColor;
 
 - (void)updateWithFrame:(CGRect)newFrame animated:(BOOL)animated overZoomed:(BOOL)overZoomed;
 

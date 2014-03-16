@@ -61,6 +61,7 @@
         // init over zoom text
         text = [[UILabel alloc] initWithFrame:CGRectZero];
         text.textAlignment = NSTextAlignmentCenter;
+        text.numberOfLines = 0;
         text.textColor = _overZoomedColor;
         text.font = _overZoomedFont;
         text.text = _overZoomedText;
