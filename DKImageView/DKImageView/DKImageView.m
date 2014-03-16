@@ -41,8 +41,8 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     _scrollView.delegate = self;
     _scrollView.maximumZoomScale = self.maximumZoomScale;
     _scrollView.minimumZoomScale = self.minimumZoomScale;
-    _scrollView.bouncesZoom = self.bouncesZoom;
-    _scrollView.bounces = self.bounces;
+    _scrollView.bouncesZoom = NO;
+    _scrollView.bounces = NO;
     _scrollView.showsHorizontalScrollIndicator = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
     _scrollView.showsVerticalScrollIndicator = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
     _scrollView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleHeight;
@@ -68,7 +68,6 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     _ratio = nil;
     self.maximumZoomScale = K_ZOOM_IMAGE_VIEW_MAX_ZOOM;
     self.minimumZoomScale = K_ZOOM_IMAGE_VIEW_MIN_ZOOM;
-    self.bouncesZoom = self.bounces = NO;
     self.contentMode = UIViewContentModeScaleAspectFit;
     
     // init scroll view
