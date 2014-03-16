@@ -16,6 +16,8 @@
     UIView *bottom;
     UIView *left;
     UIView *right;
+    
+    UILabel *text;
 }
 
 @end
@@ -24,6 +26,9 @@
 
 @synthesize color = _color;
 @synthesize overZoomedColor = _overZoomedColor;
+@synthesize overZoomedText = _overZoomedText;
+@synthesize overZoomedFont = _overZoomedFont;
+@synthesize overZoomedBackgroundColor = _overZoomedBackgroundColor;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -32,9 +37,14 @@
         if (K_VERBOSE_OVERLAY)
             self.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.2];
         
+        // init attributes
         _color = [UIColor whiteColor];
         _overZoomedColor = [UIColor colorWithRed:253./255. green:114./255. blue:1./255. alpha:1.0];
-
+        _overZoomedText = @"Over Zoomed";
+        _overZoomedFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
+        _overZoomedBackgroundColor = [UIColor clearColor];
+        
+        // init edge views
         top = [[UIView alloc] init];
         top.backgroundColor = _color;
         [self addSubview:top];
@@ -47,8 +57,29 @@
         right = [[UIView alloc] init];
         right.backgroundColor = _color;
         [self addSubview:right];
+        
+        // init over zoom text
+        text = [[UILabel alloc] initWithFrame:CGRectZero];
+        text.textAlignment = NSTextAlignmentCenter;
+        text.textColor = _overZoomedColor;
+        text.font = _overZoomedFont;
+        text.text = _overZoomedText;
+        text.backgroundColor = _overZoomedBackgroundColor;
+        text.alpha = 0;
+        [self addSubview:text];
     }
     return self;
+}
+
+- (void)updateOverZoomedText:(BOOL)overZoomed {
+    text.alpha = overZoomed;
+    text.frame = CGRectMake(left.frame.origin.x + K_EDGE_WIDTH, top.frame.origin.y + K_EDGE_WIDTH,
+                            right.frame.origin.x - left.frame.origin.x - K_EDGE_WIDTH,
+                            bottom.frame.origin.y - top.frame.origin.y - K_EDGE_WIDTH);
+    text.textColor = _overZoomedColor;
+    text.font = _overZoomedFont;
+    text.text = _overZoomedText;
+    text.backgroundColor = (K_VERBOSE_OVERLAY ? [UIColor colorWithRed:0 green:0 blue:1 alpha:0.5] : _overZoomedBackgroundColor);
 }
 
 - (void)updateWithFrame:(CGRect)newFrame overZoomed:(BOOL)overZoomed {
@@ -74,6 +105,8 @@
     right.frame = CGRectMake(newFrame.size.width - (biggerW ? K_EDGE_WIDTH : 0), -y, K_EDGE_WIDTH, newFrame.size.height + (2 * y));
 
     self.frame = newFrame;
+
+    [self updateOverZoomedText:overZoomed];
 }
 
 - (void)updateWithFrame:(CGRect)newFrame animated:(BOOL)animated overZoomed:(BOOL)overZoomed {
