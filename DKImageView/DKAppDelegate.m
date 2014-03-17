@@ -14,8 +14,8 @@
 {
     // Override point for customization after application launch.
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    self.centralViewController = (DKViewController *)[mainStoryboard instantiateViewControllerWithIdentifier: @"centralVC"];
-    self.sideViewController = (DKSideViewController *)[mainStoryboard instantiateViewControllerWithIdentifier: @"sideVC"];
+    self.centralViewController = (DKViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"centralVC"];
+    self.sideViewController = (DKSideViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"sideVC"];
     
     [self initViewDeckController];
     return YES;

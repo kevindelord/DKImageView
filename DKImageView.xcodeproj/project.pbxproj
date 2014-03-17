@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		75AD62CF18BAB1050052EF62 /* picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 75AD62CE18BAB1050052EF62 /* picture.png */; };
+		75B2D94318D798EC00C5808F /* DKPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B2D94218D798EC00C5808F /* DKPreviewViewController.m */; };
 		75C74DAC18BA9A8E00BD09BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DAB18BA9A8E00BD09BC /* Foundation.framework */; };
 		75C74DAE18BA9A8E00BD09BC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DAD18BA9A8E00BD09BC /* CoreGraphics.framework */; };
 		75C74DB018BA9A8E00BD09BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DAF18BA9A8E00BD09BC /* UIKit.framework */; };
@@ -46,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		75AD62CE18BAB1050052EF62 /* picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture.png; sourceTree = "<group>"; };
+		75B2D94118D798EC00C5808F /* DKPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DKPreviewViewController.h; path = DKPreviewViewController/DKPreviewViewController.h; sourceTree = "<group>"; };
+		75B2D94218D798EC00C5808F /* DKPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DKPreviewViewController.m; path = DKPreviewViewController/DKPreviewViewController.m; sourceTree = "<group>"; };
 		75C74DA818BA9A8E00BD09BC /* DKImageView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKImageView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C74DAB18BA9A8E00BD09BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		75C74DAD18BA9A8E00BD09BC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -110,6 +113,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		75B2D94018D798A900C5808F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				75B2D94118D798EC00C5808F /* DKPreviewViewController.h */,
+				75B2D94218D798EC00C5808F /* DKPreviewViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		75C74D9F18BA9A8E00BD09BC = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +161,7 @@
 				75C74DBB18BA9A8F00BD09BC /* DKAppDelegate.m */,
 				75C74DC018BA9A8F00BD09BC /* DKViewController.h */,
 				75C74DC118BA9A8F00BD09BC /* DKViewController.m */,
+				75B2D94018D798A900C5808F /* ViewControllers */,
 				75C74DB218BA9A8F00BD09BC /* Supporting Files */,
 				75C74DEA18BA9C9E00BD09BC /* DKSideViewController.h */,
 				75C74DEB18BA9C9E00BD09BC /* DKSideViewController.m */,
@@ -321,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75C74DFE18BAA53300BD09BC /* DKOverlayView.m in Sources */,
+				75B2D94318D798EC00C5808F /* DKPreviewViewController.m in Sources */,
 				75C74DE718BA9B3900BD09BC /* IISideController.m in Sources */,
 				75C74DFD18BAA53300BD09BC /* DKImageOverlayView.m in Sources */,
 				75C74DB818BA9A8F00BD09BC /* main.m in Sources */,

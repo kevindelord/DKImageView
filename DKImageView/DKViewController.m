@@ -8,6 +8,7 @@
 
 #import "DKAppDelegate.h"
 #import "DKViewController.h"
+#import "DKPreviewViewController.h"
 
 @interface DKViewController ()
 
@@ -32,6 +33,17 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+}
+
+- (IBAction)menu {
+    [self.viewDeckController toggleLeftViewAnimated:YES];
+}
+
+- (IBAction)preview {
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    DKPreviewViewController *previewVC = (DKPreviewViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"previewVC"];
+    previewVC.image = self.imageView.croppedImage;
+    [self presentViewController:previewVC animated:YES completion:nil];
 }
 
 #pragma mark - DKImageView delegate methods
