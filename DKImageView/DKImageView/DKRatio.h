@@ -9,21 +9,17 @@
 #import <Foundation/Foundation.h>
 
 enum DKRatioType {
+    DKRatioTypeNone,
     DKRatioType16_9,
     DKRatioType4_3,
-    DKRatioTypeNone
+    DKRatioType3_4,
+    DKRatioType3_2,
+    DKRatioType3_1,
+    DKRatioType2_3,
+    DKRatioType1_1,
+    DKRatioType5_1,
+    DKRatioTypeTotal
     };
-
-//(_optionId == K_RATIO_ID_NO_FORMAT
-//        || _optionId == K_RATIO_ID_4_3
-//        || _optionId == K_RATIO_ID_3_4
-//        || _optionId == K_RATIO_ID_3_2
-//        || _optionId == K_RATIO_ID_3_1
-//        || _optionId == K_RATIO_ID_2_3
-//        || _optionId == K_RATIO_ID_1_1
-//        || _optionId == K_RATIO_ID_16_9
-//        || _optionId == K_RATIO_ID_5_1
-//        );
 
 typedef NSInteger DKRatioType;
 

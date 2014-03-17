@@ -50,15 +50,24 @@ NSInteger gcd(NSInteger m, NSInteger n) {
 + (DKRatio *)ratioForType:(DKRatioType)type {
     DKRatio *ratio = [DKRatio new];
     ratio.type = type;
-    if (type == DKRatioType16_9) ratio.values = CGSizeMake(16, 9);
-    if (type == DKRatioType4_3) ratio.values  = CGSizeMake(4, 3);
-    if (type == DKRatioTypeNone) ratio.values = CGSizeZero;
-    
+
+    if (type == DKRatioType16_9)    ratio.values = CGSizeMake(16, 9);
+    if (type == DKRatioType4_3)     ratio.values = CGSizeMake(4, 3);
+    if (type == DKRatioType3_4)     ratio.values = CGSizeMake(3, 4);
+    if (type == DKRatioType3_2)     ratio.values = CGSizeMake(3, 2);
+    if (type == DKRatioType3_1)     ratio.values = CGSizeMake(3, 1);
+    if (type == DKRatioType2_3)     ratio.values = CGSizeMake(2, 3);
+    if (type == DKRatioType1_1)     ratio.values = CGSizeMake(1, 1);
+    if (type == DKRatioType5_1)     ratio.values = CGSizeMake(5, 1);
+
+    if (type == DKRatioTypeNone || type == DKRatioTypeTotal)
+        ratio.values = CGSizeZero;
+
     return ratio;
 }
 
 + (BOOL)isAvailableRatio:(NSInteger)_optionId {
-    return (_optionId <= DKRatioTypeNone);
+    return (_optionId <= DKRatioTypeTotal);
 }
 
 @end

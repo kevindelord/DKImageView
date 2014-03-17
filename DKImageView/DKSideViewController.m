@@ -35,7 +35,10 @@
     self.bouncesZoomNO.selected = YES;
     self.overZoomColorDefault.selected = YES;
     self.croppingColorDefault.selected = YES;
-    self.ratioNone.selected = YES;
+    self.ratioScrollView.contentSize = CGSizeMake(self.ratioScrollView.subviews.count * 40 + 20, 0);
+    for (UIButton *btn in self.ratioScrollView.subviews) {
+        btn.selected = (btn.tag == DKRatioTypeNone);
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,28 +62,23 @@
 
 #pragma mark - Action methods
 
-- (IBAction)changeRatioToNone {
-    [self.imageView setRatioForType:DKRatioTypeNone];
-    
-    self.ratioNone.selected = YES;
-    self.ratio4_3.selected = NO;
-    self.ratio16_9.selected = NO;
-}
+- (IBAction)changeRatio:(id)sender {
+    // Tag 0: DKRatioTypeNone
+    // Tag 1: DKRatioType16_9
+    // Tag 2: DKRatioType4_3
+    // Tag 3: DKRatioType3_4
+    // Tag 4: DKRatioType3_2
+    // Tag 5: DKRatioType3_1
+    // Tag 6: DKRatioType2_3
+    // Tag 7: DKRatioType1_1
+    // Tag 8: DKRatioType5_1
 
-- (IBAction)changeRatioTo16_9 {
-    [self.imageView setRatioForType:DKRatioType16_9];
+    [self.imageView setRatioForType:((UIButton *)sender).tag];
 
-    self.ratioNone.selected = NO;
-    self.ratio4_3.selected = NO;
-    self.ratio16_9.selected = YES;
-}
-
-- (IBAction)changeRatioTo4_3 {
-    [self.imageView setRatioForType:DKRatioType4_3];
-
-    self.ratioNone.selected = NO;
-    self.ratio4_3.selected = YES;
-    self.ratio16_9.selected = NO;
+    for (UIButton *btn in self.ratioScrollView.subviews) {
+        btn.selected = NO;
+    }
+    ((UIButton *)sender).selected = YES;
 }
 
 - (IBAction)croppingFrameGreenColor {
