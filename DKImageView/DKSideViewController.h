@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DKViewController.h"
 
-@interface DKSideViewController : UIViewController
+@interface DKSideViewController : UIViewController <DKImageViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UIButton *bouncesYES;
 @property (nonatomic, retain) IBOutlet UIButton *bouncesNO;

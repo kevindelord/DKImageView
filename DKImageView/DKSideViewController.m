@@ -22,6 +22,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // init the image view
+    self.imageView.image = [UIImage imageNamed:@"picture.png"];
+    self.imageView.delegate = self;
+
     // save original colors
     _defaultCroppingFrameColor = self.imageView.croppingFrameColor;
     _defaultOverZoomedColor = self.imageView.overZoomedColor;
@@ -42,6 +46,18 @@
 - (DKImageView *)imageView {
     return ((DKAppDelegate *)[[UIApplication sharedApplication] delegate]).centralViewController.imageView;
 }
+
+#pragma mark - DKImageView delegate methods
+
+- (BOOL)imageView:(DKImageView *)imageView overZoomedAtScale:(CGFloat)scale {
+    return (imageView.zoomScale > 3);
+}
+
+- (void)imageViewDidEndZooming:(DKImageView *)imageView atScale:(CGFloat)scale {
+    // do whatever you want now
+}
+
+#pragma mark - Action methods
 
 - (IBAction)changeRatioToNone {
     [self.imageView setRatioForType:DKRatioTypeNone];

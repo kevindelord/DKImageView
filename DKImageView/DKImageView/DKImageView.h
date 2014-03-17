@@ -17,7 +17,7 @@
 
 @protocol DKImageViewDelegate <NSObject>
 @optional
-- (BOOL)isOverZoomed;
+- (BOOL)imageView:(DKImageView *)imageView overZoomedAtScale:(CGFloat)scale;
 - (void)imageViewDidEndZooming:(DKImageView *)imageView atScale:(CGFloat)scale;
 @end
 

@@ -124,8 +124,8 @@
 
 - (void)updateOverlayWithOverZoomedVerification:(BOOL)animated {
     BOOL overZoomed = NO;
-    if (self.dkImageView.delegate && [self.dkImageView.delegate respondsToSelector:@selector(isOverZoomed)])
-        overZoomed = [self.dkImageView.delegate isOverZoomed];
+    if (self.dkImageView.delegate && [self.dkImageView.delegate respondsToSelector:@selector(imageView:overZoomedAtScale:)])
+        overZoomed = [self.dkImageView.delegate imageView:self.dkImageView overZoomedAtScale:self.dkImageView.zoomScale];
     [_overlay updateWithFrame:_croppedFrame animated:animated overZoomed:overZoomed];
 }
 

@@ -22,9 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.imageView.image = [UIImage imageNamed:@"picture.png"];
-    self.imageView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,6 +32,8 @@
     [super viewDidAppear:animated];
 }
 
+#pragma mark - Action methods
+
 - (IBAction)menu {
     [self.viewDeckController toggleLeftViewAnimated:YES];
 }
@@ -44,16 +43,6 @@
     DKPreviewViewController *previewVC = (DKPreviewViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"previewVC"];
     previewVC.image = self.imageView.croppedImage;
     [self presentViewController:previewVC animated:YES completion:nil];
-}
-
-#pragma mark - DKImageView delegate methods
-
-- (BOOL)isOverZoomed {
-    return (self.imageView.zoomScale > 3);
-}
-
-- (void)imageViewDidEndZooming:(DKImageView *)imageView atScale:(CGFloat)scale {
-    // do whatever you want now
 }
 
 @end

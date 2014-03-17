@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DKImageView.h"
 
-@interface DKViewController : UIViewController <DKImageViewDelegate>
+@interface DKViewController : UIViewController
 
 @property (nonatomic, retain) IBOutlet DKImageView *imageView;
 
