@@ -35,10 +35,15 @@
     self.bouncesZoomNO.selected = YES;
     self.overZoomColorDefault.selected = YES;
     self.croppingColorDefault.selected = YES;
-    self.ratioScrollView.contentSize = CGSizeMake(self.ratioScrollView.subviews.count * 40 + 20, 0);
+
     for (UIButton *btn in self.ratioScrollView.subviews) {
         btn.selected = (btn.tag == DKRatioTypeNone);
     }
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    self.ratioScrollView.contentSize = CGSizeMake(self.ratioScrollView.subviews.count * 46 + 20, 0);
 }
 
 - (void)didReceiveMemoryWarning {
