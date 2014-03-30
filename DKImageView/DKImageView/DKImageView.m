@@ -12,7 +12,7 @@
 #import "DKRatio.h"
 
 @interface DKImageView () {
-    DKBlackOverlayView *    _blackOverlay;
+    DKBlackOverlayView *    _blackOverlayView;
     DKImageOverlayView *    _overlayView;
     DKRatio *               _ratio;
     
@@ -30,6 +30,7 @@
 @synthesize bouncesZoom = _bouncesZoom;
 @synthesize contentMode = _contentMode;
 @synthesize zoomEnabled = _zoomEnabled;
+@synthesize croppingFrameEnabled = _croppingFrameEnabled;
 
 static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 	return CGRectMake(rect.origin.x * scaleX, rect.origin.y * scaleY, rect.size.width * scaleX, rect.size.height * scaleY);
@@ -61,6 +62,20 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     [_scrollView addSubview:_imageView];
 }
 
+- (void)initOverlayViews {
+    // black Overlay
+    CGRect frame = CGRectMake(0, 0, _imageView.frame.size.width, _imageView.frame.size.height);
+    _blackOverlayView = [[DKBlackOverlayView alloc] initWithFrame:frame];
+    _blackOverlayView.alpha = 0.0;
+    [_imageView addSubview:_blackOverlayView];
+
+    // cropping Frame
+    _overlayView = [[DKImageOverlayView alloc] initWithFrame:frame scrollView:_scrollView imageView:_imageView];
+    _overlayView.dkImageView = self;
+    _overlayView.alpha = 0.0;
+    [self addSubview:_overlayView];
+}
+
 - (void)setup {
     // init self.view
     self.clipsToBounds = YES;
@@ -73,6 +88,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     _zoomEnabled = NO;
     _bounces = NO;
     _bouncesZoom = NO;
+    _croppingFrameEnabled = NO;
     
     // init scroll view
     [self initScrollView];
@@ -80,16 +96,9 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     // init _imageView
     [self initImageView];
 
-    // black Overlay
-    CGRect frame = CGRectMake(0, 0, _imageView.frame.size.width, _imageView.frame.size.height);
-    _blackOverlay = [[DKBlackOverlayView alloc] initWithFrame:frame];
-    [_imageView addSubview:_blackOverlay];
+    // init _overlayView and _blackOverlay
+    [self initOverlayViews];
 
-    // cropping Frame
-    _overlayView = [[DKImageOverlayView alloc] initWithFrame:frame scrollView:_scrollView imageView:_imageView];
-    _overlayView.dkImageView = self;
-    [self addSubview:_overlayView];
-    
     self.ratio = [DKRatio ratioForType:DKRatioTypeNone];
 }
 
@@ -115,12 +124,12 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 - (void)resetContainers {
     _imageView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     _imageView.bounds = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    _blackOverlay.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    _blackOverlay.bounds = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    _blackOverlayView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    _blackOverlayView.bounds = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     _scrollView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     _scrollView.zoomScale = 1.0;
     _overlayView.alpha = 0.0;
-    _blackOverlay.alpha = 0.0;
+    _blackOverlayView.alpha = 0.0;
 }
 
 - (void)layoutSubviews {
@@ -170,6 +179,21 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     }
 }
 
+- (void)setCroppingFrameEnabled:(BOOL)croppingFrameEnabled {
+    // only change the cropping ratio to the default value when the frame is displayed and then hidden.
+    // We need to do so in case the user wants to crop its picture after that.
+#warning TODO: create a custom ratio. the frame has to be the same the 'inside' picture.
+    if (_croppingFrameEnabled && croppingFrameEnabled)
+        [self setRatioForType:DKRatioTypeNone];
+
+    // set the boolean value
+    _croppingFrameEnabled = croppingFrameEnabled;
+
+    // show or not the overlay views
+    _blackOverlayView.alpha = croppingFrameEnabled;
+    _overlayView.alpha = croppingFrameEnabled;
+}
+
 - (CGFloat)zoomScale {
     return _scrollView.zoomScale;
 }
@@ -203,7 +227,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 - (void)setContentMode:(UIViewContentMode)contentMode {
     _contentMode = contentMode;
     _imageView.contentMode = contentMode;
-#warning TODO
+#warning TODO: implement any needed modification when the content mode changes.
 }
 
 - (UIColor *)croppingFrameColor {
@@ -259,8 +283,8 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 }
 
 - (void)updateBlackOverlay {
-    _blackOverlay.frame = CGRectMake(0, 0, _imageView.frame.size.width, _imageView.frame.size.height);
-    [_blackOverlay updateWithFrame:[_overlayView overlayFrameInsideContainer]];
+    _blackOverlayView.frame = CGRectMake(0, 0, _imageView.frame.size.width, _imageView.frame.size.height);
+    [_blackOverlayView updateWithFrame:[_overlayView overlayFrameInsideContainer]];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -321,14 +345,14 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     
     // make it smooth
     [UIView animateWithDuration:0.3 animations:^{
-        _overlayView.alpha = 1.0;
-        _blackOverlay.alpha = 1.0;
+        _overlayView.alpha = _croppingFrameEnabled;
+        _blackOverlayView.alpha = _croppingFrameEnabled;
         [_scrollView setContentSize:[self updatedScrollViewContentSize]];
         _imageView.center = CGPointMake(_scrollView.contentSize.width * 0.5, _scrollView.contentSize.height * 0.5);
         [self updateBlackOverlay];
     } completion:^(BOOL finished) {
-        _overlayView.alpha = 1.0;
-        _blackOverlay.alpha = 1.0;
+        _overlayView.alpha = _croppingFrameEnabled;
+        _blackOverlayView.alpha = _croppingFrameEnabled;
     }];
 }
 

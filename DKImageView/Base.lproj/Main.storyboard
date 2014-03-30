@@ -429,6 +429,41 @@
                                     <action selector="zoomEnabledPressed:" destination="vNC-Tv-HUc" eventType="touchUpInside" id="S3C-3k-WTK"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cropping Frame:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aU9-ut-Bfh">
+                                <rect key="frame" x="18" y="353" width="109" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8u-v7-8lT">
+                                <rect key="frame" x="121" y="349" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Yes">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected">
+                                    <color key="titleColor" red="0.270588249" green="0.56862747670000002" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="croppingFrameEnabledPressed:" destination="vNC-Tv-HUc" eventType="touchUpInside" id="RCW-dE-0ma"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WkU-HV-aZL">
+                                <rect key="frame" x="178" y="349" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="No">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected">
+                                    <color key="titleColor" red="0.270588249" green="0.56862747670000002" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="croppingFrameEnabledPressed:" destination="vNC-Tv-HUc" eventType="touchUpInside" id="rbx-qE-Bzd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -439,6 +474,8 @@
                         <outlet property="bouncesZoomYES" destination="CBR-Rj-TZg" id="Ayh-zB-QwW"/>
                         <outlet property="croppingColorDefault" destination="FY7-H8-3UB" id="M9Q-SM-nvb"/>
                         <outlet property="croppingColorGreen" destination="BJd-Jx-7tL" id="YoW-Ke-XJV"/>
+                        <outlet property="croppingFrameEnabledNO" destination="WkU-HV-aZL" id="Dcf-dL-Mvm"/>
+                        <outlet property="croppingFrameEnabledYES" destination="m8u-v7-8lT" id="KgR-oa-ce2"/>
                         <outlet property="overZoomColorBlue" destination="RhG-hy-6ae" id="XKn-N7-G07"/>
                         <outlet property="overZoomColorDefault" destination="cue-b7-v63" id="LoD-u8-SNm"/>
                         <outlet property="ratioScrollView" destination="puh-nb-arg" id="RfJ-vQ-19A"/>

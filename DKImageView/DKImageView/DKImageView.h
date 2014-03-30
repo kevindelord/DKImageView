@@ -30,6 +30,7 @@
 @property (nonatomic) BOOL                              bounces;
 @property (nonatomic) BOOL                              bouncesZoom;
 @property (nonatomic) BOOL                              zoomEnabled;
+@property (nonatomic) BOOL                              croppingFrameEnabled;
 @property (nonatomic) UIViewContentMode                 contentMode;
 @property (nonatomic, retain) UIImage *                 image;
 

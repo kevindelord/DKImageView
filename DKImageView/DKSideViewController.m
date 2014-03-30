@@ -19,6 +19,23 @@
 
 @implementation DKSideViewController
 
+- (void)initSelectedButtons {
+    self.bouncesNO.selected = !self.imageView.bounces;
+    self.bouncesYES.selected = self.imageView.bounces;
+
+    self.bouncesZoomNO.selected = !self.imageView.bouncesZoom;
+    self.bouncesZoomYES.selected = self.imageView.bouncesZoom;
+
+    self.zoomEnabledNO.selected = !self.imageView.zoomEnabled;
+    self.zoomEnabledYES.selected = self.imageView.zoomEnabled;
+
+    self.croppingFrameEnabledNO.selected = !self.imageView.croppingFrameEnabled;
+    self.croppingFrameEnabledYES.selected = self.imageView.croppingFrameEnabled;
+
+    self.overZoomColorDefault.selected = YES;
+    self.croppingColorDefault.selected = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -26,17 +43,14 @@
     self.imageView.image = [UIImage imageNamed:@"picture.png"];
     self.imageView.delegate = self;
     self.imageView.zoomEnabled = YES;
-    
+    self.imageView.croppingFrameEnabled = YES;
+
     // save original colors
     _defaultCroppingFrameColor = self.imageView.croppingFrameColor;
     _defaultOverZoomedColor = self.imageView.overZoomedColor;
     
     // init default buttons
-    self.bouncesNO.selected = YES;
-    self.bouncesZoomNO.selected = YES;
-    self.overZoomColorDefault.selected = YES;
-    self.croppingColorDefault.selected = YES;
-    self.zoomEnabledYES.selected = YES;
+    [self initSelectedButtons];
 
     for (UIButton *btn in self.ratioScrollView.subviews) {
         btn.selected = (btn.tag == DKRatioTypeNone);
@@ -166,6 +180,23 @@
         
         self.zoomEnabledYES.selected = NO;
         self.zoomEnabledNO.selected = YES;
+    }
+}
+
+- (IBAction)croppingFrameEnabledPressed:(id)sender {
+    BOOL active = !!((UIButton *)sender).tag;
+
+    if (active) {
+        self.imageView.croppingFrameEnabled = YES;
+
+        self.croppingFrameEnabledYES.selected = YES;
+        self.croppingFrameEnabledNO.selected = NO;
+
+    } else {
+        self.imageView.croppingFrameEnabled = NO;
+
+        self.croppingFrameEnabledYES.selected = NO;
+        self.croppingFrameEnabledNO.selected = YES;
     }
 }
 
