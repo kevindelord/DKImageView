@@ -15,6 +15,9 @@
 @property (nonatomic, retain) IBOutlet UIButton *bouncesNO;
 @property (nonatomic, retain) IBOutlet UIButton *bouncesZoomYES;
 @property (nonatomic, retain) IBOutlet UIButton *bouncesZoomNO;
+@property (nonatomic, retain) IBOutlet UIButton *zoomEnabledYES;
+@property (nonatomic, retain) IBOutlet UIButton *zoomEnabledNO;
+
 @property (nonatomic, retain) IBOutlet UIButton *overZoomColorBlue;
 @property (nonatomic, retain) IBOutlet UIButton *overZoomColorDefault;
 @property (nonatomic, retain) IBOutlet UIButton *croppingColorGreen;

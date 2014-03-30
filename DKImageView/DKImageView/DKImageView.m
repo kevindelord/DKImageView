@@ -29,6 +29,7 @@
 @synthesize bounces = _bounces;
 @synthesize bouncesZoom = _bouncesZoom;
 @synthesize contentMode = _contentMode;
+@synthesize zoomEnabled = _zoomEnabled;
 
 static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 	return CGRectMake(rect.origin.x * scaleX, rect.origin.y * scaleY, rect.size.width * scaleX, rect.size.height * scaleY);
@@ -39,8 +40,8 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 - (void)initScrollView {
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     _scrollView.delegate = self;
-    _scrollView.maximumZoomScale = self.maximumZoomScale;
-    _scrollView.minimumZoomScale = self.minimumZoomScale;
+    _scrollView.maximumZoomScale = 1.0;
+    _scrollView.minimumZoomScale = 1.0;
     _scrollView.bouncesZoom = NO;
     _scrollView.bounces = NO;
     _scrollView.showsHorizontalScrollIndicator = K_ZOOM_IMAGE_VIEW_DEBUG_STATE;
@@ -154,6 +155,16 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 - (void)setImage:(UIImage *)image {
     _imageView.image = image;
     [self resetContainers];
+}
+
+- (void)setZoomEnabled:(BOOL)zoomEnabled {
+    if (zoomEnabled) {
+        _scrollView.maximumZoomScale = self.maximumZoomScale;
+        _scrollView.minimumZoomScale = self.minimumZoomScale;
+    } else {
+        _scrollView.maximumZoomScale = _scrollView.zoomScale;
+        _scrollView.minimumZoomScale = _scrollView.zoomScale;
+    }
 }
 
 - (CGFloat)zoomScale {

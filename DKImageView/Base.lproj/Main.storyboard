@@ -331,7 +331,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIL-TN-9TY">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIL-TN-9TY">
                                 <rect key="frame" x="121" y="244" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
@@ -342,7 +342,7 @@
                                     <color key="titleColor" red="0.270588249" green="0.56862747670000002" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="bouncesYESPressed" destination="vNC-Tv-HUc" eventType="touchUpInside" id="Dhx-Zf-fVm"/>
+                                    <action selector="bouncesPressed:" destination="vNC-Tv-HUc" eventType="touchUpInside" id="SKb-rm-Lco"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUR-SU-11Q">
@@ -356,7 +356,7 @@
                                     <color key="titleColor" red="0.270588249" green="0.56862747670000002" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="bouncesNOPressed" destination="vNC-Tv-HUc" eventType="touchUpInside" id="1Kp-o7-EAa"/>
+                                    <action selector="bouncesPressed:" destination="vNC-Tv-HUc" eventType="touchUpInside" id="nDk-Rs-0c0"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BouncesZoom:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EuE-AA-F7m">
@@ -366,7 +366,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBR-Rj-TZg">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBR-Rj-TZg">
                                 <rect key="frame" x="121" y="279" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
@@ -377,7 +377,7 @@
                                     <color key="titleColor" red="0.270588249" green="0.56862747670000002" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="bouncesZoomYESPressed" destination="vNC-Tv-HUc" eventType="touchUpInside" id="Y4x-a9-99i"/>
+                                    <action selector="bouncesZoomPressed:" destination="vNC-Tv-HUc" eventType="touchUpInside" id="21V-Ni-VyU"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="of8-sb-8BQ">
@@ -391,7 +391,42 @@
                                     <color key="titleColor" red="0.270588249" green="0.56862747670000002" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="bouncesZoomNOPressed" destination="vNC-Tv-HUc" eventType="touchUpInside" id="mP4-gJ-ilU"/>
+                                    <action selector="bouncesZoomPressed:" destination="vNC-Tv-HUc" eventType="touchUpInside" id="OWP-IQ-Zup"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Zoom Enabled:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbe-du-vxW">
+                                <rect key="frame" x="20" y="318" width="103" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTY-8i-A6w">
+                                <rect key="frame" x="121" y="314" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Yes">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected">
+                                    <color key="titleColor" red="0.270588249" green="0.56862747670000002" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="zoomEnabledPressed:" destination="vNC-Tv-HUc" eventType="touchUpInside" id="hgf-Uh-eJv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JTa-rQ-PW7">
+                                <rect key="frame" x="178" y="314" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="No">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected">
+                                    <color key="titleColor" red="0.270588249" green="0.56862747670000002" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="zoomEnabledPressed:" destination="vNC-Tv-HUc" eventType="touchUpInside" id="S3C-3k-WTK"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -407,6 +442,8 @@
                         <outlet property="overZoomColorBlue" destination="RhG-hy-6ae" id="XKn-N7-G07"/>
                         <outlet property="overZoomColorDefault" destination="cue-b7-v63" id="LoD-u8-SNm"/>
                         <outlet property="ratioScrollView" destination="puh-nb-arg" id="RfJ-vQ-19A"/>
+                        <outlet property="zoomEnabledNO" destination="JTa-rQ-PW7" id="8el-Rk-dCl"/>
+                        <outlet property="zoomEnabledYES" destination="bTY-8i-A6w" id="7ao-MO-0xL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6M-Nv-h4Z" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -29,6 +29,7 @@
 @property (nonatomic) CGFloat                           minimumZoomScale;
 @property (nonatomic) BOOL                              bounces;
 @property (nonatomic) BOOL                              bouncesZoom;
+@property (nonatomic) BOOL                              zoomEnabled;
 @property (nonatomic) UIViewContentMode                 contentMode;
 @property (nonatomic, retain) UIImage *                 image;
 

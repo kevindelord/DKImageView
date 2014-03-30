@@ -25,7 +25,8 @@
     // init the image view
     self.imageView.image = [UIImage imageNamed:@"picture.png"];
     self.imageView.delegate = self;
-
+    self.imageView.zoomEnabled = YES;
+    
     // save original colors
     _defaultCroppingFrameColor = self.imageView.croppingFrameColor;
     _defaultOverZoomedColor = self.imageView.overZoomedColor;
@@ -35,6 +36,7 @@
     self.bouncesZoomNO.selected = YES;
     self.overZoomColorDefault.selected = YES;
     self.croppingColorDefault.selected = YES;
+    self.zoomEnabledYES.selected = YES;
 
     for (UIButton *btn in self.ratioScrollView.subviews) {
         btn.selected = (btn.tag == DKRatioTypeNone);
@@ -114,32 +116,57 @@
     self.overZoomColorBlue.selected = NO;
 }
 
-- (IBAction)bouncesYESPressed {
-    self.imageView.bounces = YES;
+#pragma mark - Enabling bounce, zoom, frame.
 
-    self.bouncesYES.selected = YES;
-    self.bouncesNO.selected = NO;
+- (IBAction)bouncesPressed:(id)sender {
+    BOOL active = !!((UIButton *)sender).tag;
+
+    if (active) {
+        self.imageView.bounces = YES;
+
+        self.bouncesYES.selected = YES;
+        self.bouncesNO.selected = NO;
+        
+    } else {
+        self.imageView.bounces = NO;
+
+        self.bouncesYES.selected = NO;
+        self.bouncesNO.selected = YES;
+    }
 }
 
-- (IBAction)bouncesNOPressed {
-    self.imageView.bounces = NO;
+- (IBAction)bouncesZoomPressed:(id)sender {
+    BOOL active = !!((UIButton *)sender).tag;
     
-    self.bouncesYES.selected = NO;
-    self.bouncesNO.selected = YES;
+    if (active) {
+        self.imageView.bouncesZoom = YES;
+
+        self.bouncesZoomYES.selected = YES;
+        self.bouncesZoomNO.selected = NO;
+        
+    } else {
+        self.imageView.bouncesZoom = NO;
+
+        self.bouncesZoomYES.selected = NO;
+        self.bouncesZoomNO.selected = YES;
+    }
 }
 
-- (IBAction)bouncesZoomYESPressed {
-    self.imageView.bouncesZoom = YES;
-
-    self.bouncesZoomYES.selected = YES;
-    self.bouncesZoomNO.selected = NO;
-}
-
-- (IBAction)bouncesZoomNOPressed {
-    self.imageView.bouncesZoom = NO;
-
-    self.bouncesZoomYES.selected = NO;
-    self.bouncesZoomNO.selected = YES;
+- (IBAction)zoomEnabledPressed:(id)sender {
+    BOOL active = !!((UIButton *)sender).tag;
+    
+    if (active) {
+        self.imageView.zoomEnabled = YES;
+        
+        self.zoomEnabledYES.selected = YES;
+        self.zoomEnabledNO.selected = NO;
+        
+    } else {
+        self.imageView.zoomEnabled = NO;
+        
+        self.zoomEnabledYES.selected = NO;
+        self.zoomEnabledNO.selected = YES;
+    }
 }
 
 @end
