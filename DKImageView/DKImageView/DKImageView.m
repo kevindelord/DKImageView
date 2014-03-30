@@ -65,7 +65,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     // init self.view
     self.clipsToBounds = YES;
     self.userInteractionEnabled = YES;
-    self.backgroundColor = [UIColor clearColor];
+
     _ratio = nil;
     self.maximumZoomScale = K_ZOOM_IMAGE_VIEW_MAX_ZOOM;
     self.minimumZoomScale = K_ZOOM_IMAGE_VIEW_MIN_ZOOM;
