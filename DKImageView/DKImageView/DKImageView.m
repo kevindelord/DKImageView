@@ -67,9 +67,12 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     self.userInteractionEnabled = YES;
 
     _ratio = nil;
-    self.maximumZoomScale = K_ZOOM_IMAGE_VIEW_MAX_ZOOM;
-    self.minimumZoomScale = K_ZOOM_IMAGE_VIEW_MIN_ZOOM;
-    self.contentMode = UIViewContentModeScaleAspectFit;
+    _maximumZoomScale = K_ZOOM_IMAGE_VIEW_MAX_ZOOM;
+    _minimumZoomScale = K_ZOOM_IMAGE_VIEW_MIN_ZOOM;
+    _contentMode = UIViewContentModeScaleAspectFit;
+    _zoomEnabled = NO;
+    _bounces = NO;
+    _bouncesZoom = NO;
     
     // init scroll view
     [self initScrollView];
@@ -132,13 +135,12 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     // upate the image frame and scrollview
     CGRect contentFrame = [self insideFitImageSize];
     _imageView.frame = CGRectMake(_scrollView.frame.size.width * 0.5 - contentFrame.size.width * 0.5,
-                                      _scrollView.frame.size.height * 0.5 - contentFrame.size.height * 0.5,
-                                      contentFrame.size.width, contentFrame.size.height);
+                                  _scrollView.frame.size.height * 0.5 - contentFrame.size.height * 0.5,
+                                  contentFrame.size.width, contentFrame.size.height);
     _scrollView.contentSize = contentFrame.size;
     
     // update the overlay without animation
-    _overlayView.frame = CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height);
-    [_overlayView updateOverlay:NO];
+    [self updateOverlay];
     [self updateBlackOverlay];
 }
 
@@ -158,9 +160,10 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 }
 
 - (void)setZoomEnabled:(BOOL)zoomEnabled {
+    _zoomEnabled = zoomEnabled;
     if (zoomEnabled) {
-        _scrollView.maximumZoomScale = self.maximumZoomScale;
-        _scrollView.minimumZoomScale = self.minimumZoomScale;
+        _scrollView.maximumZoomScale = _maximumZoomScale;
+        _scrollView.minimumZoomScale = _minimumZoomScale;
     } else {
         _scrollView.maximumZoomScale = _scrollView.zoomScale;
         _scrollView.minimumZoomScale = _scrollView.zoomScale;
@@ -249,6 +252,11 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 }
 
 #pragma mark - rotatin & zooming methods
+
+- (void)updateOverlay {
+    _overlayView.frame = CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height);
+    [_overlayView updateOverlay:NO];
+}
 
 - (void)updateBlackOverlay {
     _blackOverlay.frame = CGRectMake(0, 0, _imageView.frame.size.width, _imageView.frame.size.height);
