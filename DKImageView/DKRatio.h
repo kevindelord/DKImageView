@@ -32,4 +32,7 @@ typedef NSInteger DKRatioType;
 + (DKRatio *)ratioForWidth:(CGFloat)width height:(CGFloat)height;
 + (DKRatio *)ratioForType:(DKRatioType)type;
 
++ (DKRatioType)ratioTypeForSize:(CGSize)size;
++ (DKRatioType)ratioTypeForWidth:(CGFloat)width height:(CGFloat)height;
+
 @end

@@ -10,7 +10,7 @@
 
 @implementation DKRatio
 
-NSInteger gcd(NSInteger m, NSInteger n) {
+NSInteger __gcd(NSInteger m, NSInteger n) {
     NSInteger t, r;
     
     if (m < n) {
@@ -24,7 +24,7 @@ NSInteger gcd(NSInteger m, NSInteger n) {
     if (r == 0) {
         return n;
     } else {
-        return gcd(n, r);
+        return __gcd(n, r);
     }
 }
 
@@ -32,18 +32,47 @@ NSInteger gcd(NSInteger m, NSInteger n) {
     return [NSString stringWithFormat:@"Ratio: { type: %ld, values: {%f ; %f} }", (long)self.type, self.values.width, self.values.height];
 }
 
++ (DKRatioType)ratioTypeForWidth:(CGFloat)w height:(CGFloat)h {
+
+    if (w == 16 && h == 9) return DKRatioType16_9;
+    if (w == 4 && h == 3) return DKRatioType4_3;
+    if (w == 3 && h == 4) return DKRatioType3_4;
+    if (w == 3 && h == 2) return DKRatioType3_2;
+    if (w == 3 && h == 1) return DKRatioType3_1;
+    if (w == 2 && h == 3) return DKRatioType2_3;
+    if (w == 1 && h == 1) return DKRatioType1_1;
+    if (w == 5 && h == 1) return DKRatioType5_1;
+
+    return DKRatioTypeNone;
+}
+
++ (DKRatioType)ratioTypeForSize:(CGSize)size {
+    if (size.height == 0 || size.width == 0)
+        return DKRatioTypeNone;
+
+    NSInteger delta = __gcd(size.width, size.height);
+    CGFloat w = size.width / delta;
+    CGFloat h = size.height / delta;
+
+    return [DKRatio ratioTypeForWidth:w height:h];
+}
+
 + (DKRatio *)ratioForWidth:(CGFloat)width height:(CGFloat)height {
     DKRatio *ratio = [DKRatio new];
     ratio.values = CGSizeMake(width, height);
-    ratio.type = DKRatioTypeNone;
+    ratio.type = [DKRatio ratioTypeForWidth:width height:height];
+
     return ratio;
 }
 
 + (DKRatio *)ratioForSize:(CGSize)size {
-    NSInteger delta = gcd(size.width, size.height);
+    if (size.height == 0 || size.width == 0)
+        return nil;
+
+    NSInteger delta = __gcd(size.width, size.height);
     CGFloat w = size.width / delta;
     CGFloat h = size.height / delta;
-    
+
     return [DKRatio ratioForWidth:w height:h];
 }
 

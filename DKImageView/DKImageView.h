@@ -19,6 +19,7 @@
 #define K_ZOOM_IMAGE_VIEW_MIN_ZOOM          1.0
 
 @class DKImageView;
+@class DKImageOverlayView;
 
 @protocol DKImageViewDelegate <NSObject>
 @optional
@@ -47,6 +48,7 @@
 
 // setter
 - (void)setRatioForType:(DKRatioType)type;
+- (void)setRatio:(DKRatio *)ratio;
 
 // cropping
 - (UIImage *)croppedImage;
@@ -56,5 +58,9 @@
 - (CGFloat)zoomScale;
 - (CGRect)insideFitImageSize;
 - (DKRatio *)ratio;
+- (DKImageOverlayView *)overlayView;
+
+// update
+- (void)updateOverlay;
 
 @end

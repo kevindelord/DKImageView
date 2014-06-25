@@ -277,6 +277,10 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 #pragma mark - rotatin & zooming methods
 
+- (DKImageOverlayView *)overlayView {
+    return _overlayView;
+}
+
 - (void)updateOverlay {
     _overlayView.frame = CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height);
     [_overlayView updateOverlay:NO];
