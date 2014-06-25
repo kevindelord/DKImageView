@@ -1,0 +1,575 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		751CC75E195ADDDE00659E6A /* IISideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 751CC759195ADDDE00659E6A /* IISideController.m */; };
+		751CC75F195ADDDE00659E6A /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 751CC75B195ADDDE00659E6A /* IIViewDeckController.m */; };
+		751CC760195ADDDE00659E6A /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 751CC75D195ADDDE00659E6A /* IIWrapController.m */; };
+		751CC76C195ADDEA00659E6A /* DKBlackOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 751CC763195ADDEA00659E6A /* DKBlackOverlayView.m */; };
+		751CC76D195ADDEA00659E6A /* DKImageOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 751CC765195ADDEA00659E6A /* DKImageOverlayView.m */; };
+		751CC76E195ADDEA00659E6A /* DKImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 751CC767195ADDEA00659E6A /* DKImageView.m */; };
+		751CC76F195ADDEA00659E6A /* DKOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 751CC769195ADDEA00659E6A /* DKOverlayView.m */; };
+		751CC770195ADDEA00659E6A /* DKRatio.m in Sources */ = {isa = PBXBuildFile; fileRef = 751CC76B195ADDEA00659E6A /* DKRatio.m */; };
+		751CC77B195ADE0F00659E6A /* DKPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 751CC774195ADE0F00659E6A /* DKPreviewViewController.m */; };
+		751CC77C195ADE0F00659E6A /* DKSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 751CC777195ADE0F00659E6A /* DKSideViewController.m */; };
+		751CC77D195ADE0F00659E6A /* DKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 751CC77A195ADE0F00659E6A /* DKViewController.m */; };
+		751CC782195ADE2000659E6A /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 751CC77F195ADE2000659E6A /* bg.png */; };
+		751CC783195ADE2000659E6A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 751CC780195ADE2000659E6A /* Images.xcassets */; };
+		751CC784195ADE2000659E6A /* picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 751CC781195ADE2000659E6A /* picture.png */; };
+		751CC78D195ADE2700659E6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 751CC786195ADE2700659E6A /* Main.storyboard */; };
+		751CC78F195ADE2700659E6A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 751CC78A195ADE2700659E6A /* InfoPlist.strings */; };
+		751CC790195ADE2700659E6A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 751CC78C195ADE2700659E6A /* main.m */; };
+		751CC793195ADEAB00659E6A /* DKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 751CC792195ADEAB00659E6A /* DKAppDelegate.m */; };
+		75C74DAC18BA9A8E00BD09BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DAB18BA9A8E00BD09BC /* Foundation.framework */; };
+		75C74DAE18BA9A8E00BD09BC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DAD18BA9A8E00BD09BC /* CoreGraphics.framework */; };
+		75C74DB018BA9A8E00BD09BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DAF18BA9A8E00BD09BC /* UIKit.framework */; };
+		75C74DCB18BA9A8F00BD09BC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DCA18BA9A8F00BD09BC /* XCTest.framework */; };
+		75C74DCC18BA9A8F00BD09BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DAB18BA9A8E00BD09BC /* Foundation.framework */; };
+		75C74DCD18BA9A8F00BD09BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DAF18BA9A8E00BD09BC /* UIKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		75C74DCE18BA9A8F00BD09BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75C74DA018BA9A8E00BD09BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 75C74DA718BA9A8E00BD09BC;
+			remoteInfo = DKImageView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		751CC758195ADDDE00659E6A /* IISideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IISideController.h; sourceTree = "<group>"; };
+		751CC759195ADDDE00659E6A /* IISideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IISideController.m; sourceTree = "<group>"; };
+		751CC75A195ADDDE00659E6A /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
+		751CC75B195ADDDE00659E6A /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
+		751CC75C195ADDDE00659E6A /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
+		751CC75D195ADDDE00659E6A /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
+		751CC762195ADDEA00659E6A /* DKBlackOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKBlackOverlayView.h; sourceTree = "<group>"; };
+		751CC763195ADDEA00659E6A /* DKBlackOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKBlackOverlayView.m; sourceTree = "<group>"; };
+		751CC764195ADDEA00659E6A /* DKImageOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKImageOverlayView.h; sourceTree = "<group>"; };
+		751CC765195ADDEA00659E6A /* DKImageOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKImageOverlayView.m; sourceTree = "<group>"; };
+		751CC766195ADDEA00659E6A /* DKImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKImageView.h; sourceTree = "<group>"; };
+		751CC767195ADDEA00659E6A /* DKImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKImageView.m; sourceTree = "<group>"; };
+		751CC768195ADDEA00659E6A /* DKOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKOverlayView.h; sourceTree = "<group>"; };
+		751CC769195ADDEA00659E6A /* DKOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKOverlayView.m; sourceTree = "<group>"; };
+		751CC76A195ADDEA00659E6A /* DKRatio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKRatio.h; sourceTree = "<group>"; };
+		751CC76B195ADDEA00659E6A /* DKRatio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKRatio.m; sourceTree = "<group>"; };
+		751CC773195ADE0F00659E6A /* DKPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKPreviewViewController.h; sourceTree = "<group>"; };
+		751CC774195ADE0F00659E6A /* DKPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKPreviewViewController.m; sourceTree = "<group>"; };
+		751CC776195ADE0F00659E6A /* DKSideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKSideViewController.h; sourceTree = "<group>"; };
+		751CC777195ADE0F00659E6A /* DKSideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKSideViewController.m; sourceTree = "<group>"; };
+		751CC779195ADE0F00659E6A /* DKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKViewController.h; sourceTree = "<group>"; };
+		751CC77A195ADE0F00659E6A /* DKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKViewController.m; sourceTree = "<group>"; };
+		751CC77F195ADE2000659E6A /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		751CC780195ADE2000659E6A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		751CC781195ADE2000659E6A /* picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture.png; sourceTree = "<group>"; };
+		751CC787195ADE2700659E6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		751CC788195ADE2700659E6A /* DKImageView-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DKImageView-Info.plist"; sourceTree = "<group>"; };
+		751CC789195ADE2700659E6A /* DKImageView-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DKImageView-Prefix.pch"; sourceTree = "<group>"; };
+		751CC78B195ADE2700659E6A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		751CC78C195ADE2700659E6A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		751CC791195ADEAB00659E6A /* DKAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKAppDelegate.h; sourceTree = SOURCE_ROOT; };
+		751CC792195ADEAB00659E6A /* DKAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKAppDelegate.m; sourceTree = SOURCE_ROOT; };
+		75C74DA818BA9A8E00BD09BC /* DKImageView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DKImageView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		75C74DAB18BA9A8E00BD09BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		75C74DAD18BA9A8E00BD09BC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		75C74DAF18BA9A8E00BD09BC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		75C74DC918BA9A8F00BD09BC /* DKImageViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DKImageViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		75C74DCA18BA9A8F00BD09BC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		75C74DA518BA9A8E00BD09BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75C74DAE18BA9A8E00BD09BC /* CoreGraphics.framework in Frameworks */,
+				75C74DB018BA9A8E00BD09BC /* UIKit.framework in Frameworks */,
+				75C74DAC18BA9A8E00BD09BC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75C74DC618BA9A8F00BD09BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75C74DCB18BA9A8F00BD09BC /* XCTest.framework in Frameworks */,
+				75C74DCD18BA9A8F00BD09BC /* UIKit.framework in Frameworks */,
+				75C74DCC18BA9A8F00BD09BC /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		751CC756195ADD6F00659E6A /* Extern */ = {
+			isa = PBXGroup;
+			children = (
+				751CC757195ADDDE00659E6A /* ViewDeck */,
+			);
+			name = Extern;
+			sourceTree = "<group>";
+		};
+		751CC757195ADDDE00659E6A /* ViewDeck */ = {
+			isa = PBXGroup;
+			children = (
+				751CC758195ADDDE00659E6A /* IISideController.h */,
+				751CC759195ADDDE00659E6A /* IISideController.m */,
+				751CC75A195ADDDE00659E6A /* IIViewDeckController.h */,
+				751CC75B195ADDDE00659E6A /* IIViewDeckController.m */,
+				751CC75C195ADDDE00659E6A /* IIWrapController.h */,
+				751CC75D195ADDDE00659E6A /* IIWrapController.m */,
+			);
+			name = ViewDeck;
+			path = Extern/ViewDeck;
+			sourceTree = SOURCE_ROOT;
+		};
+		751CC761195ADDEA00659E6A /* DKImageView */ = {
+			isa = PBXGroup;
+			children = (
+				751CC762195ADDEA00659E6A /* DKBlackOverlayView.h */,
+				751CC763195ADDEA00659E6A /* DKBlackOverlayView.m */,
+				751CC764195ADDEA00659E6A /* DKImageOverlayView.h */,
+				751CC765195ADDEA00659E6A /* DKImageOverlayView.m */,
+				751CC766195ADDEA00659E6A /* DKImageView.h */,
+				751CC767195ADDEA00659E6A /* DKImageView.m */,
+				751CC768195ADDEA00659E6A /* DKOverlayView.h */,
+				751CC769195ADDEA00659E6A /* DKOverlayView.m */,
+				751CC76A195ADDEA00659E6A /* DKRatio.h */,
+				751CC76B195ADDEA00659E6A /* DKRatio.m */,
+			);
+			name = DKImageView;
+			path = ../DKImageView;
+			sourceTree = "<group>";
+		};
+		751CC771195ADE0F00659E6A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				751CC772195ADE0F00659E6A /* DKPreviewViewController */,
+				751CC775195ADE0F00659E6A /* DKSideViewController */,
+				751CC778195ADE0F00659E6A /* DKViewController */,
+			);
+			path = ViewControllers;
+			sourceTree = SOURCE_ROOT;
+		};
+		751CC772195ADE0F00659E6A /* DKPreviewViewController */ = {
+			isa = PBXGroup;
+			children = (
+				751CC773195ADE0F00659E6A /* DKPreviewViewController.h */,
+				751CC774195ADE0F00659E6A /* DKPreviewViewController.m */,
+			);
+			path = DKPreviewViewController;
+			sourceTree = "<group>";
+		};
+		751CC775195ADE0F00659E6A /* DKSideViewController */ = {
+			isa = PBXGroup;
+			children = (
+				751CC776195ADE0F00659E6A /* DKSideViewController.h */,
+				751CC777195ADE0F00659E6A /* DKSideViewController.m */,
+			);
+			path = DKSideViewController;
+			sourceTree = "<group>";
+		};
+		751CC778195ADE0F00659E6A /* DKViewController */ = {
+			isa = PBXGroup;
+			children = (
+				751CC779195ADE0F00659E6A /* DKViewController.h */,
+				751CC77A195ADE0F00659E6A /* DKViewController.m */,
+			);
+			path = DKViewController;
+			sourceTree = "<group>";
+		};
+		751CC77E195ADE2000659E6A /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				751CC77F195ADE2000659E6A /* bg.png */,
+				751CC780195ADE2000659E6A /* Images.xcassets */,
+				751CC781195ADE2000659E6A /* picture.png */,
+			);
+			path = Ressources;
+			sourceTree = SOURCE_ROOT;
+		};
+		751CC785195ADE2700659E6A /* SupportedFiles */ = {
+			isa = PBXGroup;
+			children = (
+				751CC786195ADE2700659E6A /* Main.storyboard */,
+				751CC788195ADE2700659E6A /* DKImageView-Info.plist */,
+				751CC789195ADE2700659E6A /* DKImageView-Prefix.pch */,
+				751CC78A195ADE2700659E6A /* InfoPlist.strings */,
+				751CC78C195ADE2700659E6A /* main.m */,
+			);
+			path = SupportedFiles;
+			sourceTree = SOURCE_ROOT;
+		};
+		75C74D9F18BA9A8E00BD09BC = {
+			isa = PBXGroup;
+			children = (
+				751CC761195ADDEA00659E6A /* DKImageView */,
+				751CC756195ADD6F00659E6A /* Extern */,
+				75C74DB118BA9A8E00BD09BC /* Project */,
+				75C74DAA18BA9A8E00BD09BC /* Frameworks */,
+				75C74DA918BA9A8E00BD09BC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		75C74DA918BA9A8E00BD09BC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				75C74DA818BA9A8E00BD09BC /* DKImageView.app */,
+				75C74DC918BA9A8F00BD09BC /* DKImageViewTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		75C74DAA18BA9A8E00BD09BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75C74DAB18BA9A8E00BD09BC /* Foundation.framework */,
+				75C74DAD18BA9A8E00BD09BC /* CoreGraphics.framework */,
+				75C74DAF18BA9A8E00BD09BC /* UIKit.framework */,
+				75C74DCA18BA9A8F00BD09BC /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		75C74DB118BA9A8E00BD09BC /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				751CC791195ADEAB00659E6A /* DKAppDelegate.h */,
+				751CC792195ADEAB00659E6A /* DKAppDelegate.m */,
+				751CC785195ADE2700659E6A /* SupportedFiles */,
+				751CC77E195ADE2000659E6A /* Ressources */,
+				751CC771195ADE0F00659E6A /* ViewControllers */,
+			);
+			name = Project;
+			path = DKImageView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		75C74DA718BA9A8E00BD09BC /* DKImageView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75C74DDA18BA9A8F00BD09BC /* Build configuration list for PBXNativeTarget "DKImageView" */;
+			buildPhases = (
+				75C74DA418BA9A8E00BD09BC /* Sources */,
+				75C74DA518BA9A8E00BD09BC /* Frameworks */,
+				75C74DA618BA9A8E00BD09BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DKImageView;
+			productName = DKImageView;
+			productReference = 75C74DA818BA9A8E00BD09BC /* DKImageView.app */;
+			productType = "com.apple.product-type.application";
+		};
+		75C74DC818BA9A8F00BD09BC /* DKImageViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75C74DDD18BA9A8F00BD09BC /* Build configuration list for PBXNativeTarget "DKImageViewTests" */;
+			buildPhases = (
+				75C74DC518BA9A8F00BD09BC /* Sources */,
+				75C74DC618BA9A8F00BD09BC /* Frameworks */,
+				75C74DC718BA9A8F00BD09BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				75C74DCF18BA9A8F00BD09BC /* PBXTargetDependency */,
+			);
+			name = DKImageViewTests;
+			productName = DKImageViewTests;
+			productReference = 75C74DC918BA9A8F00BD09BC /* DKImageViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		75C74DA018BA9A8E00BD09BC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DK;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = DK;
+				TargetAttributes = {
+					75C74DC818BA9A8F00BD09BC = {
+						TestTargetID = 75C74DA718BA9A8E00BD09BC;
+					};
+				};
+			};
+			buildConfigurationList = 75C74DA318BA9A8E00BD09BC /* Build configuration list for PBXProject "DKImageView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 75C74D9F18BA9A8E00BD09BC;
+			productRefGroup = 75C74DA918BA9A8E00BD09BC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				75C74DA718BA9A8E00BD09BC /* DKImageView */,
+				75C74DC818BA9A8F00BD09BC /* DKImageViewTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		75C74DA618BA9A8E00BD09BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				751CC78F195ADE2700659E6A /* InfoPlist.strings in Resources */,
+				751CC782195ADE2000659E6A /* bg.png in Resources */,
+				751CC783195ADE2000659E6A /* Images.xcassets in Resources */,
+				751CC784195ADE2000659E6A /* picture.png in Resources */,
+				751CC78D195ADE2700659E6A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75C74DC718BA9A8F00BD09BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		75C74DA418BA9A8E00BD09BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				751CC75E195ADDDE00659E6A /* IISideController.m in Sources */,
+				751CC77D195ADE0F00659E6A /* DKViewController.m in Sources */,
+				751CC76D195ADDEA00659E6A /* DKImageOverlayView.m in Sources */,
+				751CC76F195ADDEA00659E6A /* DKOverlayView.m in Sources */,
+				751CC77B195ADE0F00659E6A /* DKPreviewViewController.m in Sources */,
+				751CC793195ADEAB00659E6A /* DKAppDelegate.m in Sources */,
+				751CC76E195ADDEA00659E6A /* DKImageView.m in Sources */,
+				751CC76C195ADDEA00659E6A /* DKBlackOverlayView.m in Sources */,
+				751CC75F195ADDDE00659E6A /* IIViewDeckController.m in Sources */,
+				751CC760195ADDDE00659E6A /* IIWrapController.m in Sources */,
+				751CC770195ADDEA00659E6A /* DKRatio.m in Sources */,
+				751CC790195ADE2700659E6A /* main.m in Sources */,
+				751CC77C195ADE0F00659E6A /* DKSideViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75C74DC518BA9A8F00BD09BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		75C74DCF18BA9A8F00BD09BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 75C74DA718BA9A8E00BD09BC /* DKImageView */;
+			targetProxy = 75C74DCE18BA9A8F00BD09BC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		751CC786195ADE2700659E6A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				751CC787195ADE2700659E6A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		751CC78A195ADE2700659E6A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				751CC78B195ADE2700659E6A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		75C74DD818BA9A8F00BD09BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		75C74DD918BA9A8F00BD09BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		75C74DDB18BA9A8F00BD09BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SupportedFiles/DKImageView-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/SupportedFiles/DKImageView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		75C74DDC18BA9A8F00BD09BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SupportedFiles/DKImageView-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/SupportedFiles/DKImageView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		75C74DDE18BA9A8F00BD09BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DKImageView.app/DKImageView";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DKImageView/DKImageView-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DKImageViewTests/DKImageViewTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		75C74DDF18BA9A8F00BD09BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DKImageView.app/DKImageView";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DKImageView/DKImageView-Prefix.pch";
+				INFOPLIST_FILE = "DKImageViewTests/DKImageViewTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		75C74DA318BA9A8E00BD09BC /* Build configuration list for PBXProject "DKImageView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75C74DD818BA9A8F00BD09BC /* Debug */,
+				75C74DD918BA9A8F00BD09BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75C74DDA18BA9A8F00BD09BC /* Build configuration list for PBXNativeTarget "DKImageView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75C74DDB18BA9A8F00BD09BC /* Debug */,
+				75C74DDC18BA9A8F00BD09BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75C74DDD18BA9A8F00BD09BC /* Build configuration list for PBXNativeTarget "DKImageViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75C74DDE18BA9A8F00BD09BC /* Debug */,
+				75C74DDF18BA9A8F00BD09BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 75C74DA018BA9A8E00BD09BC /* Project object */;
+}
