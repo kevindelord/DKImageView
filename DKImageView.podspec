@@ -8,5 +8,6 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/kevindelord/DKImageView.git", :tag => s.version.to_s }
   s.platform         = :ios
   s.requires_arc     = true
+  s.framework        = 'CoreGraphics'
   s.source_files     = 'DKImageView/*'
 end
