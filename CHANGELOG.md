@@ -1,6 +1,6 @@
 # DKImageView CHANGELOG
 
-## 0.1.0
+## 0.1.2
 
 - Move debug defines on DKImageView.h
 
