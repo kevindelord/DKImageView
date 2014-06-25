@@ -7,6 +7,7 @@
 //
 
 #import "DKBlackOverlayView.h"
+#import "DKImageView.h"
 
 @interface DKBlackOverlayView () {
     UIView *_top;

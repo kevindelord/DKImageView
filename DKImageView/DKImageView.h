@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "DKImageOverlayView.h"
 
+#define K_VERBOSE_OVERLAY                   NO
+#define K_VERBOSE_CROPPING                  NO
+#define K_OVER_COLORED                      NO
+#define K_OVERLAY_INTERACTION               NO
+
 #define K_ZOOM_IMAGE_VIEW_DEBUG_STATE       NO
 #define K_ZOOM_IMAGE_VIEW_MAX_ZOOM          10.0
 #define K_ZOOM_IMAGE_VIEW_MIN_ZOOM          1.0
