@@ -29,7 +29,7 @@ NSInteger gcd(NSInteger m, NSInteger n) {
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Ratio: { type: %d, values: {%f ; %f} }", self.type, self.values.width, self.values.height];
+    return [NSString stringWithFormat:@"Ratio: { type: %ld, values: {%f ; %f} }", (long)self.type, self.values.width, self.values.height];
 }
 
 + (DKRatio *)ratioForWidth:(CGFloat)width height:(CGFloat)height {
