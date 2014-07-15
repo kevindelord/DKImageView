@@ -367,33 +367,26 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 - (NSDictionary *)croppingCoordinates {
     if (!_imageView.image) return nil;
-    if (K_VERBOSE_CROPPING) {
-        NSLog(@"----------------------------------");
-        NSLog(@"orignal pricture: %@", [NSValue valueWithCGSize:_imageView.image.size]);
-    }
+    DKLog(K_VERBOSE_CROPPING, @"----------------------------------");
+    DKLog(K_VERBOSE_CROPPING, @"orignal pricture: %@", [NSValue valueWithCGSize:_imageView.image.size]);
     
     CGRect ratioRect = [_overlayView croppedFrame];
     if (ratioRect.size.width == 0 || ratioRect.size.height == 0) return nil;
     CGRect visibleRect = GKScaleRect([self visibleRectForCGRect:ratioRect], [self scaleX], [self scaleY]);
-    
-    if (K_VERBOSE_CROPPING) {
-        NSLog(@"cropped frame real size: %@", [NSValue valueWithCGRect:visibleRect]);
-    }
-    
+
+    DKLog(K_VERBOSE_CROPPING, @"cropped frame real size: %@", [NSValue valueWithCGRect:visibleRect]);
+
     CGFloat top = (visibleRect.origin.y * 100) / _imageView.image.size.height;
     CGFloat left = (visibleRect.origin.x * 100) / _imageView.image.size.width;
     CGFloat width = (visibleRect.size.width * 100) / _imageView.image.size.width;
     CGFloat height = (visibleRect.size.height * 100) / _imageView.image.size.height;
-    
-    if (K_VERBOSE_CROPPING) {
-        NSLog(@"TOP  : %f = (%f * 100) / %f", top, visibleRect.origin.y, _imageView.image.size.height);
-        NSLog(@"LEFT  : %f = (%f * 100) / %f", top, visibleRect.origin.x, _imageView.image.size.width);
-        NSLog(@"WIDTH  : %f = (%f * 100) / %f", top, visibleRect.size.width, _imageView.image.size.width);
-        NSLog(@"HEIGHT  : %f = (%f * 100) / %f", top, visibleRect.size.height, _imageView.image.size.height);
-        
-        NSLog(@"percentage = top: %f, left: %f, width: %f, height: %f", top, left, width, height);
-    }
-    
+
+    DKLog(K_VERBOSE_CROPPING, @"TOP  : %f = (%f * 100) / %f", top, visibleRect.origin.y, _imageView.image.size.height);
+    DKLog(K_VERBOSE_CROPPING, @"LEFT  : %f = (%f * 100) / %f", top, visibleRect.origin.x, _imageView.image.size.width);
+    DKLog(K_VERBOSE_CROPPING, @"WIDTH  : %f = (%f * 100) / %f", top, visibleRect.size.width, _imageView.image.size.width);
+    DKLog(K_VERBOSE_CROPPING, @"HEIGHT  : %f = (%f * 100) / %f", top, visibleRect.size.height, _imageView.image.size.height);
+    DKLog(K_VERBOSE_CROPPING, @"percentage = top: %f, left: %f, width: %f, height: %f", top, left, width, height);
+
     NSMutableDictionary * crop = [NSMutableDictionary new];
     [crop setObject:[NSString stringWithFormat:@"%f", top] forKey:@"top"];
     [crop setObject:[NSString stringWithFormat:@"%f", left] forKey:@"left"];
@@ -448,10 +441,10 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     CGImageRef imageRef = CGImageCreateWithImageInRect([_imageView.image CGImage], visibleRect);
     UIImage *result = [UIImage imageWithCGImage:imageRef scale:_imageView.image.scale orientation:_imageView.image.imageOrientation];
 
-//    NSLog(@"----------------------------------");
-//    NSLog(@"visible rect: %@", [NSValue valueWithCGRect:visibleRect]);
-//    NSLog(@"CGImageRef Size: %zu %zu", CGImageGetHeight(imageRef), CGImageGetWidth(imageRef));
-//    NSLog(@"croppedImage size: { %.2f : %.2f }", result.size.width, result.size.height);
+//    DKLog(K_VERBOSE_CROPPING, @"----------------------------------");
+//    DKLog(K_VERBOSE_CROPPING, @"visible rect: %@", [NSValue valueWithCGRect:visibleRect]);
+//    DKLog(K_VERBOSE_CROPPING, @"CGImageRef Size: %zu %zu", CGImageGetHeight(imageRef), CGImageGetWidth(imageRef));
+//    DKLog(K_VERBOSE_CROPPING, @"croppedImage size: { %.2f : %.2f }", result.size.width, result.size.height);
     
     CGImageRelease(imageRef);
     return result;

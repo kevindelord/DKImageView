@@ -170,9 +170,9 @@
 #pragma mark - CGRect Methods 
 
 - (void)log:(CGRect)f cont:(CGRect)container {
-    NSLog(@"    frame: %0.f %0.f %0.f %0.f", f.origin.x, f.origin.y, f.size.width, f.size.height);
-    NSLog(@"container: %0.f %0.f %0.f %0.f", container.origin.x, container.origin.y, container.size.width, container.size.height);
-    NSLog(@"---- %d %d %d %d ----",
+    DKLog(K_VERBOSE_OVERLAY, @"    frame: %0.f %0.f %0.f %0.f", f.origin.x, f.origin.y, f.size.width, f.size.height);
+    DKLog(K_VERBOSE_OVERLAY, @"container: %0.f %0.f %0.f %0.f", container.origin.x, container.origin.y, container.size.width, container.size.height);
+    DKLog(K_VERBOSE_OVERLAY, @"---- %d %d %d %d ----",
           (int)f.origin.x >= (int)container.origin.x,
           ((int)f.origin.x + (int)f.size.width) <= ((int)container.origin.x + (int)container.size.width),
           (int)f.origin.y >= (int)container.origin.y,
@@ -253,8 +253,7 @@
     sz = [DKImageOverlayView adjustSize:sz toCGRect:insideImageFrame];
     
     CGRect f = CGRectMake(0, 0, sz.width, sz.height);
-    if (K_VERBOSE_OVERLAY)
-        NSLog(@"ratioRect: %0.f %0.f %0.f %0.f", f.origin.x, f.origin.y, f.size.width, f.size.height);
+    DKLog(K_VERBOSE_OVERLAY, @"ratioRect: %0.f %0.f %0.f %0.f", f.origin.x, f.origin.y, f.size.width, f.size.height);
     return f;
 }
 
@@ -276,9 +275,7 @@
     CGRect f = CGRectMake(self.frame.size.width * 0.5 - sz.width * 0.5 - self.frame.origin.x,
                           self.frame.size.height * 0.5 - sz.height * 0.5 - self.frame.origin.y,
                           sz.width, sz.height);
-
-    if (K_VERBOSE_OVERLAY)
-        NSLog(@"ratioRect: %0.f %0.f %0.f %0.f", f.origin.x, f.origin.y, f.size.width, f.size.height);
+    DKLog(K_VERBOSE_OVERLAY, @"ratioRect: %0.f %0.f %0.f %0.f", f.origin.x, f.origin.y, f.size.width, f.size.height);
     return f;
 }
 
