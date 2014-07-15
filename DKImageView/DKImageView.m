@@ -350,7 +350,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     // make it smooth
     [UIView animateWithDuration:0.3 animations:^{
         // set the overlay to its new position
-        [_overlayView updateOverlay:YES completion:nil];
+        [_overlayView updateOverlay:NO completion:nil];
 
         _overlayView.alpha = _croppingFrameEnabled;
         _blackOverlayView.alpha = _croppingFrameEnabled;
