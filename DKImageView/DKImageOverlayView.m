@@ -122,14 +122,14 @@
 
 #pragma mark - drawing methods
 
-- (void)updateOverlayWithOverZoomedVerification:(BOOL)animated {
+- (void)updateOverlayWithOverZoomedVerification:(BOOL)animated completion:(void (^)(BOOL finished))completion {
     BOOL overZoomed = NO;
     if (self.dkImageView.delegate && [self.dkImageView.delegate respondsToSelector:@selector(imageView:overZoomedAtScale:)])
         overZoomed = [self.dkImageView.delegate imageView:self.dkImageView overZoomedAtScale:self.dkImageView.zoomScale];
-    [_overlay updateWithFrame:_croppedFrame animated:animated overZoomed:overZoomed];
+    [_overlay updateWithFrame:_croppedFrame animated:animated overZoomed:overZoomed completion:completion];
 }
 
-- (void)updateOverlayAfterDragging:(BOOL)animated {
+- (void)updateOverlayAfterDragging:(BOOL)animated completion:(void (^)(BOOL finished))completion {
     
     if (K_OVERLAY_INTERACTION == NO)
         return ;
@@ -146,14 +146,14 @@
         // inside the image frame
         if ([self isFrame:f insideOfContainer:container] == false) {
             _croppedFrame = [self setFrame:f insideOfContainer:container];
-            [self updateOverlayWithOverZoomedVerification:animated];
+            [self updateOverlayWithOverZoomedVerification:animated completion:completion];
         }
     }
 }
 
-- (void)updateOverlay:(BOOL)animated {
+- (void)updateOverlay:(BOOL)animated completion:(void (^)(BOOL finished))completion {
     _croppedFrame = [self frameForCurrentRatio];
-    [self updateOverlayWithOverZoomedVerification:animated];
+    [self updateOverlayWithOverZoomedVerification:animated completion:completion];
 }
 
 - (CGRect)overlayFrameInsideContainer {

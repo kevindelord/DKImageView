@@ -72,15 +72,20 @@
     return self;
 }
 
-- (void)updateOverZoomedText:(BOOL)overZoomed {
-    text.alpha = overZoomed;
-    text.frame = CGRectMake(left.frame.origin.x + K_EDGE_WIDTH, top.frame.origin.y + K_EDGE_WIDTH,
-                            right.frame.origin.x - left.frame.origin.x - K_EDGE_WIDTH,
-                            bottom.frame.origin.y - top.frame.origin.y - K_EDGE_WIDTH);
-    text.textColor = _overZoomedColor;
-    text.font = _overZoomedFont;
-    text.text = _overZoomedText;
-    text.backgroundColor = (K_VERBOSE_OVERLAY ? [UIColor colorWithRed:0 green:0 blue:1 alpha:0.5] : _overZoomedBackgroundColor);
+- (void)updateOverZoomedText:(BOOL)overZoomed completion:(void (^)(BOOL finished))completion {
+
+    [UIView animateWithDuration:0.3 animations:^{
+
+        text.alpha = overZoomed;
+        text.frame = CGRectMake(left.frame.origin.x + K_EDGE_WIDTH, top.frame.origin.y + K_EDGE_WIDTH,
+                                right.frame.origin.x - left.frame.origin.x - K_EDGE_WIDTH,
+                                bottom.frame.origin.y - top.frame.origin.y - K_EDGE_WIDTH);
+        text.textColor = _overZoomedColor;
+        text.font = _overZoomedFont;
+        text.text = _overZoomedText;
+        text.backgroundColor = (K_VERBOSE_OVERLAY ? [UIColor colorWithRed:0 green:0 blue:1 alpha:0.5] : _overZoomedBackgroundColor);
+
+    } completion:completion];
 }
 
 - (void)updateWithFrame:(CGRect)newFrame overZoomed:(BOOL)overZoomed {
@@ -106,15 +111,21 @@
     right.frame = CGRectMake(newFrame.size.width - (biggerW ? K_EDGE_WIDTH : 0), -y, K_EDGE_WIDTH, newFrame.size.height + (2 * y));
 
     self.frame = newFrame;
-
-    [self updateOverZoomedText:overZoomed];
 }
 
-- (void)updateWithFrame:(CGRect)newFrame animated:(BOOL)animated overZoomed:(BOOL)overZoomed {
-    if (animated)
-        [UIView animateWithDuration:0.3 animations:^{ [self updateWithFrame:newFrame overZoomed:overZoomed]; }];
-    else
+- (void)updateWithFrame:(CGRect)newFrame animated:(BOOL)animated overZoomed:(BOOL)overZoomed completion:(void (^)(BOOL finished))completion {
+
+    if (animated) {
+        [UIView animateWithDuration:0.3 animations:^{
+            [self updateWithFrame:newFrame overZoomed:overZoomed];
+        } completion:^(BOOL finished) {
+            [self updateOverZoomedText:overZoomed completion:completion];
+        }];
+
+    } else {
         [self updateWithFrame:newFrame overZoomed:overZoomed];
+        [self updateOverZoomedText:overZoomed completion:completion];
+    }
 }
 
 @end

@@ -16,6 +16,6 @@
 @property (nonatomic, retain) UIFont *      overZoomedFont;
 @property (nonatomic, retain) UIColor *     overZoomedBackgroundColor;
 
-- (void)updateWithFrame:(CGRect)newFrame animated:(BOOL)animated overZoomed:(BOOL)overZoomed;
+- (void)updateWithFrame:(CGRect)newFrame animated:(BOOL)animated overZoomed:(BOOL)overZoomed completion:(void (^)(BOOL finished))completion;
 
 @end

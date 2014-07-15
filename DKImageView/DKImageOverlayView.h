@@ -24,8 +24,8 @@
 - (CGRect)croppedFrame;
 - (CGRect)overlayFrameInsideContainer;
 
-- (void)updateOverlay:(BOOL)animated;
-- (void)updateOverlayAfterDragging:(BOOL)animated;
+- (void)updateOverlay:(BOOL)animated completion:(void (^)(BOOL finished))completion;
+- (void)updateOverlayAfterDragging:(BOOL)animated completion:(void (^)(BOOL finished))completion;
 
 + (CGRect)frameForRatio:(DKRatio *)ratio imageCGSize:(CGSize)sz;
 + (CGSize)adjustSize:(CGSize)size withSize:(CGSize)rSize;

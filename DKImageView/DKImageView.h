@@ -61,6 +61,6 @@
 - (DKImageOverlayView *)overlayView;
 
 // update
-- (void)updateOverlay;
+- (void)updateOverlay:(BOOL)animated;
 
 @end

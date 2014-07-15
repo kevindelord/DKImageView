@@ -149,7 +149,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     _scrollView.contentSize = contentFrame.size;
     
     // update the overlay without animation
-    [self updateOverlay];
+    [self updateOverlay:NO];
     [self updateBlackOverlay];
 }
 
@@ -236,7 +236,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 - (void)setCroppingFrameColor:(UIColor *)croppingFrameColor {
     _overlayView.overlay.color = croppingFrameColor;
-    [_overlayView updateOverlay:NO];
+    [_overlayView updateOverlay:NO completion:nil];
 }
 
 - (UIColor *)overZoomedColor {
@@ -245,7 +245,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 - (void)setOverZoomedColor:(UIColor *)overZoomedColor {
     _overlayView.overlay.overZoomedColor = overZoomedColor;
-    [_overlayView updateOverlay:NO];
+    [_overlayView updateOverlay:NO completion:nil];
 }
 
 - (UIFont *)overZoomedFont {
@@ -254,7 +254,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 - (void)setOverZoomedFont:(UIFont *)overZoomedFont {
     _overlayView.overlay.overZoomedFont = overZoomedFont;
-    [_overlayView updateOverlay:NO];
+    [_overlayView updateOverlay:NO completion:nil];
 }
 
 - (NSString *)overZoomedText {
@@ -263,7 +263,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 - (void)setOverZoomedText:(NSString *)overZoomedText {
     _overlayView.overlay.overZoomedText = overZoomedText;
-    [_overlayView updateOverlay:NO];
+    [_overlayView updateOverlay:NO completion:nil];
 }
 
 - (UIColor *)overZoomedBackgroundColor {
@@ -272,7 +272,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 - (void)setOverZoomedBackgroundColor:(UIColor *)overZoomedBackgroundColor {
     _overlayView.overlay.overZoomedBackgroundColor = overZoomedBackgroundColor;
-    [_overlayView updateOverlay:NO];
+    [_overlayView updateOverlay:NO completion:nil];
 }
 
 #pragma mark - rotatin & zooming methods
@@ -281,9 +281,9 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     return _overlayView;
 }
 
-- (void)updateOverlay {
+- (void)updateOverlay:(BOOL)animated {
     _overlayView.frame = CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height);
-    [_overlayView updateOverlay:NO];
+    [_overlayView updateOverlay:animated completion:nil];
 }
 
 - (void)updateBlackOverlay {
@@ -301,7 +301,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     // readapt the overlay frame
-    [_overlayView updateOverlayAfterDragging:YES];
+    [_overlayView updateOverlayAfterDragging:YES completion:nil];
 //    [self updateBlackOverlay];
 }
 
@@ -321,15 +321,17 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
-    // readapt the overlay frame
-    [_overlayView updateOverlay:YES];
 
+    // readapt the overlay frame
+    [_overlayView updateOverlay:YES completion:^(BOOL finished) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(imageViewDidEndZooming:atScale:)])
+            [self.delegate imageViewDidEndZooming:self atScale:self.zoomScale];
+    }];
     // make the change
     [_scrollView setContentSize:[self updatedScrollViewContentSize]];
     _imageView.center = CGPointMake(_scrollView.contentSize.width * 0.5, _scrollView.contentSize.height * 0.5);
+    // update the black overlay
     [self updateBlackOverlay];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(imageViewDidEndZooming:atScale:)])
-        [self.delegate imageViewDidEndZooming:self atScale:self.zoomScale];
 }
 
 #pragma mark - Set ratio
@@ -344,11 +346,12 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 - (void)setRatio:(DKRatio *)ratio {
     _ratio = ratio;
-    // set the overlay to its new position
-    [_overlayView updateOverlay:YES];
-    
+
     // make it smooth
     [UIView animateWithDuration:0.3 animations:^{
+        // set the overlay to its new position
+        [_overlayView updateOverlay:YES completion:nil];
+
         _overlayView.alpha = _croppingFrameEnabled;
         _blackOverlayView.alpha = _croppingFrameEnabled;
         [_scrollView setContentSize:[self updatedScrollViewContentSize]];
