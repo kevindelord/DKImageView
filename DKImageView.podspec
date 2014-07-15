@@ -10,4 +10,8 @@ Pod::Spec.new do |s|
   s.requires_arc     = true
   s.framework        = 'CoreGraphics'
   s.source_files     = 'DKImageView/*'
+  s.dependency         'DKHelper'
+  s.prefix_header_contents = <<-EOS
+#import "DKHelper.h"
+EOS
 end
