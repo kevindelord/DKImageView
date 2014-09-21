@@ -18,11 +18,11 @@
 @property (nonatomic, retain) DKOverlayView *   overlay;
 @property (nonatomic, retain) DKImageView *     dkImageView;
 
-- (id)initWithFrame:(CGRect)frame scrollView:(UIScrollView *)scrollView imageView:(UIImageView *)imageView;
+- (instancetype)initWithFrame:(CGRect)frame scrollView:(UIScrollView *)scrollView imageView:(UIImageView *)imageView;
 
-- (CGRect)overlayFrame;
-- (CGRect)croppedFrame;
-- (CGRect)overlayFrameInsideContainer;
+@property (nonatomic, readonly) CGRect overlayFrame;
+@property (nonatomic, readonly) CGRect croppedFrame;
+@property (nonatomic, readonly) CGRect overlayFrameInsideContainer;
 
 - (void)updateOverlay:(BOOL)animated completion:(void (^)(BOOL finished))completion;
 - (void)updateOverlayAfterDragging:(BOOL)animated completion:(void (^)(BOOL finished))completion;

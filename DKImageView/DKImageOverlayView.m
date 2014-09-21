@@ -25,11 +25,11 @@
 
 #pragma mark - Init methods
 
-- (id)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame {
     return nil;
 }
 
-- (id)initWithFrame:(CGRect)frame scrollView:(UIScrollView *)scrollView imageView:(UIImageView *)imageView {
+- (instancetype)initWithFrame:(CGRect)frame scrollView:(UIScrollView *)scrollView imageView:(UIImageView *)imageView {
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = K_OVERLAY_INTERACTION;

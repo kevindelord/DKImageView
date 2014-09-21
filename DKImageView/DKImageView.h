@@ -48,17 +48,16 @@
 
 // setter
 - (void)setRatioForType:(DKRatioType)type;
-- (void)setRatio:(DKRatio *)ratio;
 
 // cropping
-- (UIImage *)croppedImage;
-- (NSDictionary *)croppingCoordinates;
+@property (nonatomic, readonly, strong) UIImage *croppedImage;
+@property (nonatomic, readonly, copy) NSDictionary *croppingCoordinates;
 
 // getter
-- (CGFloat)zoomScale;
-- (CGRect)insideFitImageSize;
-- (DKRatio *)ratio;
-- (DKImageOverlayView *)overlayView;
+@property (nonatomic, readonly) CGFloat zoomScale;
+@property (nonatomic, readonly) CGRect insideFitImageSize;
+@property (nonatomic, strong) DKRatio *ratio;
+@property (nonatomic, readonly, strong) DKImageOverlayView *overlayView;
 
 // update
 - (void)updateOverlay:(BOOL)animated;

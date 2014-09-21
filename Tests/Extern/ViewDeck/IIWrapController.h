@@ -34,7 +34,7 @@
 @property (nonatomic, copy) void(^onViewWillDisappear)(IIWrapController* controller, BOOL animated);
 @property (nonatomic, copy) void(^onViewDidDisappear)(IIWrapController* controller, BOOL animated);
 
-- (id)initWithViewController:(UIViewController*)controller;
+- (instancetype)initWithViewController:(UIViewController*)controller NS_DESIGNATED_INITIALIZER;
 
 @end
 

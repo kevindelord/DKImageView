@@ -111,7 +111,7 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
 
 #warning TODO: create method initWithImage:(UIImage*)
 #warning TODO: create method initWithFrame:(CGRect)frame image:(UIImage*)
-- (id)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self setup];
@@ -390,11 +390,11 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     DKLog(K_VERBOSE_CROPPING, @"percentage = top: %f, left: %f, width: %f, height: %f", top, left, width, height);
 
     NSMutableDictionary * crop = [NSMutableDictionary new];
-    [crop setObject:[NSString stringWithFormat:@"%f", top] forKey:@"top"];
-    [crop setObject:[NSString stringWithFormat:@"%f", left] forKey:@"left"];
-    [crop setObject:[NSString stringWithFormat:@"%f", width] forKey:@"width"];
-    [crop setObject:[NSString stringWithFormat:@"%f", height] forKey:@"height"];
-    [crop setObject:@"0" forKey:@"angle"];
+    crop[@"top"] = [NSString stringWithFormat:@"%f", top];
+    crop[@"left"] = [NSString stringWithFormat:@"%f", left];
+    crop[@"width"] = [NSString stringWithFormat:@"%f", width];
+    crop[@"height"] = [NSString stringWithFormat:@"%f", height];
+    crop[@"angle"] = @"0";
     
     return crop;
 }

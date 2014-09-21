@@ -90,11 +90,6 @@ __typeof__(h) __h = (h);                                    \
 #import <MessageUI/MessageUI.h>
 
 enum {
-    IIViewDeckNoSide = 0,
-    IIViewDeckCenterSide = 5,
-};
-
-enum {
     IIViewDeckNoOrientation = 0,
 };
 
@@ -173,11 +168,11 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
 - (void)panToSlidingFrameForOffset:(CGFloat)frame forOrientation:(IIViewDeckOffsetOrientation)orientation;
 - (void)hideAppropriateSideViews;
 
-- (BOOL)setSlidingAndReferenceViews;
+@property (nonatomic, readonly) BOOL setSlidingAndReferenceViews;
 - (void)applyShadowToSlidingViewAnimated:(BOOL)animated;
 - (void)restoreShadowToSlidingView;
 - (void)arrangeViewsAfterRotation;
-- (CGFloat)relativeStatusBarHeight;
+@property (nonatomic, readonly) CGFloat relativeStatusBarHeight;
 
 - (NSArray *)bouncingValuesForViewSide:(IIViewDeckSide)viewSide maximumBounce:(CGFloat)maxBounce numberOfBounces:(CGFloat)numberOfBounces dampingFactor:(CGFloat)zeta duration:(NSTimeInterval)duration;
 
@@ -263,17 +258,17 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
 
 #pragma mark - Initalisation and deallocation
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     return [self initWithCenterViewController:nil];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     return [self initWithCenterViewController:nil];
 }
 
-- (id)initWithCenterViewController:(UIViewController*)centerController {
+- (instancetype)initWithCenterViewController:(UIViewController*)centerController {
     if ((self = [super initWithNibName:nil bundle:nil])) {
         _elastic = YES;
         _willAppearShouldArrangeViewsAfterRotation = (UIInterfaceOrientation)UIDeviceOrientationUnknown;
@@ -314,21 +309,21 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
     return self;
 }
 
-- (id)initWithCenterViewController:(UIViewController*)centerController leftViewController:(UIViewController*)leftController {
+- (instancetype)initWithCenterViewController:(UIViewController*)centerController leftViewController:(UIViewController*)leftController {
     if ((self = [self initWithCenterViewController:centerController])) {
         self.leftController = leftController;
     }
     return self;
 }
 
-- (id)initWithCenterViewController:(UIViewController*)centerController rightViewController:(UIViewController*)rightController {
+- (instancetype)initWithCenterViewController:(UIViewController*)centerController rightViewController:(UIViewController*)rightController {
     if ((self = [self initWithCenterViewController:centerController])) {
         self.rightController = rightController;
     }
     return self;
 }
 
-- (id)initWithCenterViewController:(UIViewController*)centerController leftViewController:(UIViewController*)leftController rightViewController:(UIViewController*)rightController {
+- (instancetype)initWithCenterViewController:(UIViewController*)centerController leftViewController:(UIViewController*)leftController rightViewController:(UIViewController*)rightController {
     if ((self = [self initWithCenterViewController:centerController])) {
         self.leftController = leftController;
         self.rightController = rightController;
@@ -336,21 +331,21 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
     return self;
 }
 
-- (id)initWithCenterViewController:(UIViewController*)centerController topViewController:(UIViewController*)topController {
+- (instancetype)initWithCenterViewController:(UIViewController*)centerController topViewController:(UIViewController*)topController {
     if ((self = [self initWithCenterViewController:centerController])) {
         self.topController = topController;
     }
     return self;
 }
 
-- (id)initWithCenterViewController:(UIViewController*)centerController bottomViewController:(UIViewController*)bottomController {
+- (instancetype)initWithCenterViewController:(UIViewController*)centerController bottomViewController:(UIViewController*)bottomController {
     if ((self = [self initWithCenterViewController:centerController])) {
         self.bottomController = bottomController;
     }
     return self;
 }
 
-- (id)initWithCenterViewController:(UIViewController*)centerController topViewController:(UIViewController*)topController bottomViewController:(UIViewController*)bottomController {
+- (instancetype)initWithCenterViewController:(UIViewController*)centerController topViewController:(UIViewController*)topController bottomViewController:(UIViewController*)bottomController {
     if ((self = [self initWithCenterViewController:centerController])) {
         self.topController = topController;
         self.bottomController = bottomController;
@@ -358,7 +353,7 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
     return self;
 }
 
-- (id)initWithCenterViewController:(UIViewController*)centerController leftViewController:(UIViewController*)leftController rightViewController:(UIViewController*)rightController topViewController:(UIViewController*)topController bottomViewController:(UIViewController*)bottomController {
+- (instancetype)initWithCenterViewController:(UIViewController*)centerController leftViewController:(UIViewController*)leftController rightViewController:(UIViewController*)rightController topViewController:(UIViewController*)topController bottomViewController:(UIViewController*)bottomController {
     if ((self = [self initWithCenterViewController:centerController])) {
         self.leftController = leftController;
         self.rightController = rightController;
@@ -1067,6 +1062,9 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
             
         case IIViewDeckBottomSide:
             return _ledge[viewDeckSide] - self.referenceBounds.size.height;
+
+        default:
+            return 0;
     }
     
     return 0;
@@ -1817,7 +1815,7 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
     previewController.view.hidden = NO;
     
     [CATransaction begin];
-    [CATransaction setValue:[NSNumber numberWithFloat:duration] forKey:kCATransactionAnimationDuration];
+    [CATransaction setValue:@(duration) forKey:kCATransactionAnimationDuration];
     [CATransaction setCompletionBlock:^{
         // only re-hide controller if the view has not been panned mid-animation
         if (_offset == 0.0f) {
@@ -1896,7 +1894,7 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
         time = (t / (float)steps) * duration;
         offset = abs(expf(-zeta * wn * time) * ((Vo / wd) * sin(wd * time)));
         offset = direction * [self limitOffset:offset forOrientation:IIViewDeckOffsetOrientationFromIIViewDeckSide(viewDeckSide)] + position;
-        [values addObject:[NSNumber numberWithFloat:offset]];
+        [values addObject:@(offset)];
     }
     
     return values;

@@ -30,7 +30,7 @@
 @synthesize overZoomedFont = _overZoomedFont;
 @synthesize overZoomedBackgroundColor = _overZoomedBackgroundColor;
 
-- (id)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         

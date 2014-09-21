@@ -64,7 +64,7 @@
 
 #pragma mark - View lifecycle
 
-- (id)initWithViewController:(UIViewController *)controller {
+- (instancetype)initWithViewController:(UIViewController *)controller {
     if ((self = [super init])) {
         II_RETAIN(controller);
         _wrappedController = controller;
