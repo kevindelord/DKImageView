@@ -1,5 +1,11 @@
 # DKImageView CHANGELOG
 
+## 0.2.1
+
+- Modern Objective-C
+- Add TODO warnings
+- Mark the pod as not maintained anymore.
+
 ## 0.2.0
 
 - Improve logs

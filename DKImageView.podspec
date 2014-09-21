@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   s.name             = "DKImageView"
   s.version          = File.read('VERSION')
   s.deprecated       = true
-  s.summary          = "[Deprecated] Library to apply zoom, ratios, crop, and funny features on a UIImageView. Still working under iOS 8 but will not be maintained anymore."
+  s.summary          = "[Deprecated] Library to apply zoom, ratios, and crop on a UIImageView. Still working under iOS 8 but will not be maintained anymore."
   s.homepage         = "https://github.com/kevindelord/DKImageView"
   s.license          = 'MIT'
   s.author           = { "kevindelord" => "delord.kevin@gmail.com" }
