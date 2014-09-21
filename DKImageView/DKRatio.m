@@ -33,7 +33,7 @@ NSInteger __gcd(NSInteger m, NSInteger n) {
 }
 
 + (DKRatioType)ratioTypeForWidth:(CGFloat)w height:(CGFloat)h {
-
+#warning TODO: add more default ratios and improve the custom ratio logic.
     if (w == 16 && h == 9) return DKRatioType16_9;
     if (w == 4 && h == 3) return DKRatioType4_3;
     if (w == 3 && h == 4) return DKRatioType3_4;

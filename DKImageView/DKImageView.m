@@ -109,6 +109,8 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scaleX, CGFloat scaleY) {
     [self setup];
 }
 
+#warning TODO: create method initWithImage:(UIImage*)
+#warning TODO: create method initWithFrame:(CGRect)frame image:(UIImage*)
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
