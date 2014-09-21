@@ -28,20 +28,7 @@
 		75C74DAC18BA9A8E00BD09BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DAB18BA9A8E00BD09BC /* Foundation.framework */; };
 		75C74DAE18BA9A8E00BD09BC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DAD18BA9A8E00BD09BC /* CoreGraphics.framework */; };
 		75C74DB018BA9A8E00BD09BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DAF18BA9A8E00BD09BC /* UIKit.framework */; };
-		75C74DCB18BA9A8F00BD09BC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DCA18BA9A8F00BD09BC /* XCTest.framework */; };
-		75C74DCC18BA9A8F00BD09BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DAB18BA9A8E00BD09BC /* Foundation.framework */; };
-		75C74DCD18BA9A8F00BD09BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C74DAF18BA9A8E00BD09BC /* UIKit.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		75C74DCE18BA9A8F00BD09BC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 75C74DA018BA9A8E00BD09BC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 75C74DA718BA9A8E00BD09BC;
-			remoteInfo = DKImageView;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		751CC758195ADDDE00659E6A /* IISideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IISideController.h; sourceTree = "<group>"; };
@@ -80,7 +67,6 @@
 		75C74DAB18BA9A8E00BD09BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		75C74DAD18BA9A8E00BD09BC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		75C74DAF18BA9A8E00BD09BC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		75C74DC918BA9A8F00BD09BC /* DKImageViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DKImageViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C74DCA18BA9A8F00BD09BC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -92,16 +78,6 @@
 				75C74DAE18BA9A8E00BD09BC /* CoreGraphics.framework in Frameworks */,
 				75C74DB018BA9A8E00BD09BC /* UIKit.framework in Frameworks */,
 				75C74DAC18BA9A8E00BD09BC /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		75C74DC618BA9A8F00BD09BC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				75C74DCB18BA9A8F00BD09BC /* XCTest.framework in Frameworks */,
-				75C74DCD18BA9A8F00BD09BC /* UIKit.framework in Frameworks */,
-				75C74DCC18BA9A8F00BD09BC /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +198,6 @@
 			isa = PBXGroup;
 			children = (
 				75C74DA818BA9A8E00BD09BC /* DKImageView.app */,
-				75C74DC918BA9A8F00BD09BC /* DKImageViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -271,24 +246,6 @@
 			productReference = 75C74DA818BA9A8E00BD09BC /* DKImageView.app */;
 			productType = "com.apple.product-type.application";
 		};
-		75C74DC818BA9A8F00BD09BC /* DKImageViewTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 75C74DDD18BA9A8F00BD09BC /* Build configuration list for PBXNativeTarget "DKImageViewTests" */;
-			buildPhases = (
-				75C74DC518BA9A8F00BD09BC /* Sources */,
-				75C74DC618BA9A8F00BD09BC /* Frameworks */,
-				75C74DC718BA9A8F00BD09BC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				75C74DCF18BA9A8F00BD09BC /* PBXTargetDependency */,
-			);
-			name = DKImageViewTests;
-			productName = DKImageViewTests;
-			productReference = 75C74DC918BA9A8F00BD09BC /* DKImageViewTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -298,11 +255,6 @@
 				CLASSPREFIX = DK;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = DK;
-				TargetAttributes = {
-					75C74DC818BA9A8F00BD09BC = {
-						TestTargetID = 75C74DA718BA9A8E00BD09BC;
-					};
-				};
 			};
 			buildConfigurationList = 75C74DA318BA9A8E00BD09BC /* Build configuration list for PBXProject "DKImageView" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -318,7 +270,6 @@
 			projectRoot = "";
 			targets = (
 				75C74DA718BA9A8E00BD09BC /* DKImageView */,
-				75C74DC818BA9A8F00BD09BC /* DKImageViewTests */,
 			);
 		};
 /* End PBXProject section */
@@ -333,13 +284,6 @@
 				751CC783195ADE2000659E6A /* Images.xcassets in Resources */,
 				751CC784195ADE2000659E6A /* picture.png in Resources */,
 				751CC78D195ADE2700659E6A /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		75C74DC718BA9A8F00BD09BC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,22 +310,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		75C74DC518BA9A8F00BD09BC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		75C74DCF18BA9A8F00BD09BC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 75C74DA718BA9A8E00BD09BC /* DKImageView */;
-			targetProxy = 75C74DCE18BA9A8F00BD09BC /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		751CC786195ADE2700659E6A /* Main.storyboard */ = {
@@ -499,46 +428,6 @@
 			};
 			name = Release;
 		};
-		75C74DDE18BA9A8F00BD09BC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DKImageView.app/DKImageView";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DKImageView/DKImageView-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "DKImageViewTests/DKImageViewTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		75C74DDF18BA9A8F00BD09BC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DKImageView.app/DKImageView";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DKImageView/DKImageView-Prefix.pch";
-				INFOPLIST_FILE = "DKImageViewTests/DKImageViewTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -556,15 +445,6 @@
 			buildConfigurations = (
 				75C74DDB18BA9A8F00BD09BC /* Debug */,
 				75C74DDC18BA9A8F00BD09BC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		75C74DDD18BA9A8F00BD09BC /* Build configuration list for PBXNativeTarget "DKImageViewTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				75C74DDE18BA9A8F00BD09BC /* Debug */,
-				75C74DDF18BA9A8F00BD09BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
